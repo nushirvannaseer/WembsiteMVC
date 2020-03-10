@@ -1,0 +1,48 @@
+﻿
+@{
+    ViewBag.Title = "Sign Up";
+}
+    <div>
+
+        <h2>Sign Up</h2>
+
+        <link href="LoginStyles.css" rel="stylesheet" type="text/css" />
+        <div>
+            <form name="signupForm" method="post" action="../../Login/addNewUser">
+                <label>First Name:</label>
+                <br />
+                <input name="fname" type="text" required />
+                <br />
+                <label>Last Name:</label>
+                <br />
+                <input name="lname" type="text" required />
+                <br />
+                <label>Username:</label>
+                <br />
+                <input name="uname" type="text" required />
+                <br />
+                <label>Email:</label>
+                <br />
+                <input name="email" type="email" required />
+                <br />
+                <label>Password:</label>
+                <br />
+                <input type="password" name="upwd" required @*pattern="/([A-Z]).{6,}/"*@ />
+                <br />
+                <label>Confirm Password:</label>
+                <br />
+                <input type="password" name="cpwd" required />
+                <br />
+                <br />
+                <br />
+                <button type="submit" style="position:center">Sign Up!</button>
+                <br /><br />
+                <h4 style="color:darkred">
+                    Already a Wembsiter?
+                </h4>
+                <a href="Index" style="color:blueviolet">Login here!</a>
+            </form>
+        </div>
+    </div>
+
+

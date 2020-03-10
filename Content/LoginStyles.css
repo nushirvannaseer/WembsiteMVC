@@ -1,0 +1,33 @@
+﻿body {
+   
+    background-image:url(sharedBG.jpg);
+    background-size:cover;
+}
+
+
+h2{
+    color:black;
+}
+
+label{
+    color:brown;
+    border-color:black;
+    font-size:medium;
+}
+
+a{
+    color:darkblue;
+    stroke:white;
+    stroke-width:5px;
+    stroke-opacity:100;
+    -webkit-text-stroke-color:black;
+}
+
+input{
+    border-radius:5px;
+}
+
+button {
+    padding: 5px;
+    margin-left:auto
+}

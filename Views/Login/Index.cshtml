@@ -1,0 +1,43 @@
+﻿
+@using Wembsite.Models
+@model Wembsite.Models.User
+@*@using Wembsite.Models.*@
+@{
+    ViewBag.Title = "Login";
+    //var alert;
+    if(Model!=null)
+    {
+       var alert =@ViewData["Message"];
+    }
+}
+
+<h2>Login</h2>
+<link href="../../Content/LoginStyles.css" rel="stylesheet" type="text/css"/>
+<div>
+    <form name="loginForm" method="post" action="../../Login/VerifyCredentials" onsubmit="validateInput()">
+        <label style="color:crimson">@ViewData["Message"]</label><br />
+        <label name="unLabel">Username:</label>
+        <input type="text" name="un" required />
+        <br />
+        <label name="pLabel">Password:</label>
+        <input type="password" name="upwd" required />
+        <br />
+        <button name="loginBtn" type="submit">Log In</button>
+        <br /><br />
+        <a href="../../Login/SignUp">New to Wembsite? Click here to create an account!</a>
+    </form>
+</div>
+
+<script>
+    function validateInput() {
+        var username = document.forms["loginForm"]["un"].value;
+        var password = document.forms["loginForm"]["upwd"].value;
+        if (username == "" || password=="") {
+            alert("Username or Password fields cannot be blank!");
+            return false;
+        }
+            
+        return true;
+    }
+</script>
+
