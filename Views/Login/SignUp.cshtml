@@ -2,47 +2,61 @@
 @{
     ViewBag.Title = "Sign Up";
 }
+<div>
+
+
+    <link href="../../Content/LoginStyles.css" rel="stylesheet" type="text/css" />
+    <link href="LoginStyles.css" rel="stylesheet" type="text/css" />
     <div>
 
-        <h2>Sign Up</h2>
+        <form class="signupForm" name="signupForm" method="post" action="../../Login/addNewUser">
 
-        <link href="LoginStyles.css" rel="stylesheet" type="text/css" />
-        <div>
-            <form name="signupForm" method="post" action="../../Login/addNewUser">
-                <label>First Name:</label>
-                <br />
-                <input name="fname" type="text" required />
-                <br />
-                <label>Last Name:</label>
-                <br />
-                <input name="lname" type="text" required />
-                <br />
-                <label>Username:</label>
-                <br />
-                <input name="uname" type="text" required />
-                <br />
-                <label>Email:</label>
-                <br />
-                <input name="email" type="email" required />
-                <br />
-                <label>Password:</label>
-                <br />
-                <input type="password" name="upwd" required @*pattern="/([A-Z]).{6,}/"*@ />
-                <br />
-                <label>Confirm Password:</label>
-                <br />
-                <input type="password" name="cpwd" required />
-                <br />
-                <br />
-                <br />
-                <button type="submit" style="position:center">Sign Up!</button>
-                <br /><br />
-                <h4 style="color:darkred">
-                    Already a Wembsiter?
-                </h4>
-                <a href="Index" style="color:blueviolet">Login here!</a>
-            </form>
-        </div>
+            <h2>Sign Up</h2>
+            <label class="label">First Name:</label>
+            <input class='inputField_Signup' name="fname" type="text" required />
+            <br />
+            <label class="label">Last Name:</label>
+            <input class='inputField_Signup' name="lname" type="text" required />
+            <br />
+            <label class="label">Username:</label>
+            <input class='inputField_Signup' name="uname" type="text" required />
+            <br />
+            <label class="label">Email:</label>
+            <input class='inputField_Signup' name="email" type="email" required />
+            <br />
+            <label class="label">Password:</label>
+            <input class='inputField_Signup' type="password" name="upwd" required  />
+            <br />
+            <label class="label">Confirm Password:</label>
+            <input class='inputField_Signup' type="password" name="cpwd" required />
+            <br />
+            <button type="submit">Sign Up!</button>
+            <br />
+            <h4 style="color:darkred">
+                Already a Wembsiter?
+            </h4>
+            <a href="Index" style="margin-bottom: 15px;">Login here!</a>
+        </form>
     </div>
+</div>
+
+
+<script>
+    function passwordValidity() {
+        var pwd = document.forms["signupForm"]["upwd"].value;
+        var cpwd = document.forms["signupForm"]["cpwd"].values;
+        if (upwd != cpwd) {
+            alert("Passwords do not match!");
+            return false;
+        }
+        var regex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!#\$%\^&\*])(?=.{8,})");
+        if (pwd.match(regex)==false) {
+            alert("Password too weak!");
+            return false;
+        }
+
+    }
+</script>
+
 
 
