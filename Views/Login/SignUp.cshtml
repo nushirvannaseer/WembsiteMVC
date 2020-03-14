@@ -7,9 +7,8 @@
 
     <link href="../../Content/LoginStyles.css" rel="stylesheet" type="text/css" />
     <link href="LoginStyles.css" rel="stylesheet" type="text/css" />
-    <div>
 
-        <form class="signupForm" name="signupForm" method="post" action="../../Login/addNewUser">
+        <div class="signupForm">
 
             <h2>Sign Up</h2>
             <label class="label">First Name:</label>
@@ -30,31 +29,61 @@
             <label class="label">Confirm Password:</label>
             <input class='inputField_Signup' type="password" name="cpwd" required />
             <br />
-            <button type="submit">Sign Up!</button>
+            <button type="submit" onclick="passwordValidity()">Sign Up!</button>
             <br />
             <h4 style="color:darkred">
                 Already a Wembsiter?
             </h4>
             <a href="Index" style="margin-bottom: 15px;">Login here!</a>
-        </form>
-    </div>
+        </div>
 </div>
 
 
 <script>
     function passwordValidity() {
-        var pwd = document.forms["signupForm"]["upwd"].value;
-        var cpwd = document.forms["signupForm"]["cpwd"].values;
-        if (upwd != cpwd) {
-            alert("Passwords do not match!");
-            return false;
-        }
-        var regex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!#\$%\^&\*])(?=.{8,})");
-        if (pwd.match(regex)==false) {
-            alert("Password too weak!");
-            return false;
-        }
+        var firstname = document.getElementsByTagName("input")[0].value;
+        var lastname = document.getElementsByTagName("input")[1].value;
+        var usern = document.getElementsByTagName("input")[2].value;
+        var emaill = document.getElementsByTagName("input")[3].value;
+        var pwd = document.getElementsByTagName("input")[4].value;
+        var cpwd = document.getElementsByTagName("input")[5].value;
+        
+        //if (pwd.localeCompare(cpwd)) {
+        //    alert("Passwords do not match!");
+        //    return false;
+        //}
+        //not working
+        //var regex = new RegExp("^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])");
+        //if (pwd.match(regex)==false) {
+        //    alert("Password too weak!");
+        //    return false;
+        //}
 
+        var fname = firstname;
+        var lname = lastname;
+        var uname = usern;
+        var email = emaill;
+        var upwd = pwd;
+        var confirmedpassword = cpwd;
+        alert(fname);
+        $.ajax({
+            url: "/LoginController/addNewUser",
+            type: "POST",
+            dataType: "json",
+            data: {
+                fname,
+                lname,
+                uname,
+                email,
+                upwd,
+                confirmedpassword
+            },
+            //success: function (mydata) {
+            //    $("#UpdateDiv").html(mydata);
+            //    history.pushState('', 'New URL: ' + href, href); // This Code lets you to change url howyouwant
+            //}
+         );
+        return false;
     }
 </script>
 
