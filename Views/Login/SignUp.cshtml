@@ -58,6 +58,7 @@
         //    alert("Password too weak!");
         //    return false;
         //}
+        //alert(firstname);
 
         var fname = firstname;
         var lname = lastname;
@@ -78,10 +79,15 @@
                 upwd,
                 confirmedpassword
             },
-            //success: function (mydata) {
-            //    $("#UpdateDiv").html(mydata);
-            //    history.pushState('', 'New URL: ' + href, href); // This Code lets you to change url howyouwant
-            //}
+            success: function (mydata) {
+                alert("failed");
+                //$("#UpdateDiv").html(mydata);
+                //history.pushState('', 'New URL: ' + href, href); // This Code lets you to change url howyouwant
+            },
+            error: function () {
+                alert("error ");
+            }
+        }
          );
         return false;
     }
