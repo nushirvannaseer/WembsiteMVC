@@ -2,16 +2,19 @@
 @{
     ViewBag.Title = "Sign Up";
 }
+
+@model string
 <div>
 
 
     <link href="../../Content/LoginStyles.css" rel="stylesheet" type="text/css" />
     <link href="LoginStyles.css" rel="stylesheet" type="text/css" />
     <div>
-
+        
         <form class="signupForm" name="signupForm" method="post" action="../../Login/addNewUser">
 
             <h2>Sign Up</h2>
+
             <label class="label">First Name:</label>
             <input class='inputField_Signup' name="fname" type="text" required />
             <br />
@@ -24,13 +27,14 @@
             <label class="label">Email:</label>
             <input class='inputField_Signup' name="email" type="email" required />
             <br />
+            <label>@Model</label>
             <label class="label">Password:</label>
-            <input class='inputField_Signup' type="password" name="upwd" required  />
+            <input class='inputField_Signup' type="password" name="upwd" required />
             <br />
             <label class="label">Confirm Password:</label>
-            <input class='inputField_Signup' type="password" name="cpwd" required />
+            <input class='inputField_Signup' type="password" name="confirmpassword" required />
             <br />
-            <button type="submit">Sign Up!</button>
+            <button type="submit" onclick="passwordValidity()">Sign Up!</button>
             <br />
             <h4 style="color:darkred">
                 Already a Wembsiter?
