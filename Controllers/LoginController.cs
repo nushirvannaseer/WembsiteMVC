@@ -20,6 +20,7 @@ namespace Wembsite.Controllers
             return View();
         }
 
+        //This is for the login page
         public ActionResult VerifyCredentials(string un, string upwd)
         {
             User usr = db.userList.Find(un);
@@ -33,17 +34,49 @@ namespace Wembsite.Controllers
             return RedirectToAction("../UserHome/Profile", usr);
         }
 
+        //This is for the sign up page
         public ActionResult addNewUser(string fname, string lname, string uname, string email, string upwd, string confirmpassword)
         {
-            User usr = new User(uname, fname, lname, email, upwd);
-            db.userList.Add(usr);
-            db.SaveChanges();
-            return View("Index");
+            if(confirmpassword!=upwd)
+            {
+                string model = "Passwords do not match!";
+                return View("SignUp", (object)model);
+            }
+
+            int result = CRUD.signUp(uname, fname, lname, email, upwd);
+            if (result == 1)
+            {
+                return RedirectToAction("../UserHome/Profile");
+                //List<User> list = CRUD.getAllUsers();
+                //return View("homePage", list);
+            }
+
+            else 
+            {
+                string model = "UserID not unique";
+                return View("Index", (object)model);
+            }
+            
         }
 
+        //Simply redirects user to signup page
         public ActionResult SignUp()
         {
             return View("SignUp");
+        }
+
+        //Redirects to ForgotPassword Page
+        public ActionResult ForgotPassword()
+        {
+            return View();
+        }
+
+        //sends password recovery code to user
+        public ActionResult SendCodeToUser(string email)
+        {
+            Random random = new Random();
+            random.Next(100000, 999999);
+            return View("Index");
         }
     }
 }
