@@ -160,5 +160,18 @@ namespace Wembsite.Models
             return user;
         }
 
+        public static void deleteUser(string username)
+        {
+            connect.Open();
+            SqlCommand cmd = new SqlCommand("DeleteUser", connect);
+
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.Parameters.Add("@username", SqlDbType.VarChar, 30).Value = username;
+            cmd.Parameters.Add("@Out", SqlDbType.Int).Direction = ParameterDirection.Output;
+            cmd.ExecuteNonQuery();
+            
+
+        }
+
     }
 }

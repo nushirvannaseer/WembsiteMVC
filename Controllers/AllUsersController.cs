@@ -21,5 +21,12 @@ namespace Wembsite.Controllers
             User user = CRUD.getUser(username);
             return View(user);
         }
+
+        public ActionResult Delete(string username)
+        {
+            CRUD.deleteUser(username);
+            List<User> users = CRUD.AllUsers();
+            return View("Index", users);
+        }
     }
 }
