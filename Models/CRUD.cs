@@ -108,5 +108,57 @@ namespace Wembsite.Models
 
         //}
 
+        public static List<User> AllUsers()
+        {
+            connect.Open();
+            SqlCommand cmd;
+
+            cmd = new SqlCommand("AllUsers", connect);
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+
+            SqlDataReader rdr = cmd.ExecuteReader();
+
+            List<User> list = new List<User>();
+            while (rdr.Read())
+            {
+                User user = new User();
+
+                user.username = rdr["username"].ToString();
+                user.password = rdr["upassword"].ToString();
+                user.firstname = rdr["firstname"].ToString();
+                user.lastname = rdr["lastname"].ToString();
+                user.email = rdr["email"].ToString();
+                list.Add(user);
+            }
+            rdr.Close();
+            connect.Close();
+
+            return list;
+        }
+
+        public static User getUser(string username)
+        {
+            connect.Open();
+            SqlCommand cmd = new SqlCommand("getUser", connect);
+
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.Parameters.Add("@username", SqlDbType.NVarChar, 30).Value = username;
+            
+            SqlDataReader rdr=cmd.ExecuteReader();
+            User user = new User();
+            if(rdr.Read())
+            {
+                user.username = rdr["username"].ToString();
+                user.password = rdr["upassword"].ToString();
+                user.firstname = rdr["firstname"].ToString();
+                user.lastname = rdr["lastname"].ToString();
+                user.email = rdr["email"].ToString();
+                rdr.Close();
+                connect.Close();
+            }
+           
+            return user;
+        }
+
     }
 }
