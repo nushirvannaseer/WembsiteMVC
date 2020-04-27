@@ -14,6 +14,8 @@ namespace Wembsite.Controllers
     {
         private UserDBContext db = new UserDBContext();
         // GET: Login
+
+        //if logged in goto homepage
         public ActionResult Index()
         {
             if (Session["username"] != null)
@@ -25,13 +27,14 @@ namespace Wembsite.Controllers
         //This is for the login page
         public ActionResult VerifyCredentials(string un, string upwd)
         {           
+            //if logged in
             if(Session["username"]!=null)
                 return RedirectToAction("../UserHome/Profile");
 
             User usr = CRUD.getUser(un);
             if (usr==null || usr.password!=upwd)
             {
-                
+               //if invalid login goto homepage 
                 ViewData["Message"] = "Invalid username or password!";
                 return View("Index");
             }
@@ -55,8 +58,6 @@ namespace Wembsite.Controllers
             if (result == 1)
             {
                 return RedirectToAction("../UserHome/Profile");
-                //List<User> list = CRUD.getAllUsers();
-                //return View("homePage", list);
             }
 
             else 

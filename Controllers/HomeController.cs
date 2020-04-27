@@ -8,6 +8,7 @@ namespace Wembsite.Controllers
 {
     public class HomeController : Controller
     {
+        //redirect to Login
         public ActionResult Index()
         {
             return RedirectToAction("../Login/Index");
