@@ -342,5 +342,18 @@ namespace Wembsite.Models
             connect.Close();
         }
 
+        public static void NewPost(string user, string post)
+        {
+            connect.Open();
+            SqlCommand cmd = new SqlCommand("AddPost", connect);
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.Parameters.Add("@UName", SqlDbType.VarChar, 30).Value = user;
+            cmd.Parameters.Add("@privacy", SqlDbType.VarChar, 20).Value = "public";
+            cmd.Parameters.Add("@RData", SqlDbType.VarChar, 100).Value = post;
+            cmd.Parameters.Add("@Out", SqlDbType.Int).Direction = ParameterDirection.Output;
+            cmd.ExecuteNonQuery();
+            connect.Close();
+        }
+
     }
 }
