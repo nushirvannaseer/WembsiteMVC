@@ -52,3 +52,9 @@ create table shared
     foreign key (username) references Users(username) on delete set null on update cascade,
     foreign key (contentID) references UserContent(contentID) 
 );
+
+create table followRequests
+(
+	sender varchar (30),
+	receiver varchar (30)
+);

@@ -169,8 +169,177 @@ namespace Wembsite.Models
             cmd.Parameters.Add("@username", SqlDbType.VarChar, 30).Value = username;
             cmd.Parameters.Add("@Out", SqlDbType.Int).Direction = ParameterDirection.Output;
             cmd.ExecuteNonQuery();
-            
+            connect.Close();
 
+        }
+
+        public static User AnonymousObject(User usr)
+        {
+            return new User
+            {
+                username = usr.username,
+                firstname = usr.firstname,
+                lastname = usr.lastname,
+                email = usr.email,
+                password = usr.password
+            };
+        }
+
+        public static List<User> DisplayFollowersOfAUser(string username)
+        {
+            connect.Open();
+            SqlCommand cmd = new SqlCommand("", connect);
+            cmd.CommandText = "select * from following where usernameA=@username";
+            cmd.Parameters.AddWithValue("@username", username);
+            //cmd.CommandType = System.Data.CommandType.Text;
+            SqlDataReader reader= cmd.ExecuteReader();
+            List<User> users= new List<User>();
+            while(reader.Read())
+            {
+                User usr = new User();
+                usr.username = reader["usernameB"].ToString();
+                users.Add(usr);
+            }
+            reader.Close();
+            connect.Close();
+            return users;
+        }
+
+        public static List<User> DisplayFollowingsOfAUser(string username)
+        {
+            connect.Open();
+            SqlCommand cmd = new SqlCommand("", connect);
+            cmd.CommandText = "select * from following where usernameB=@username";
+            cmd.Parameters.AddWithValue("@username", username);
+            //cmd.CommandType = System.Data.CommandType.Text;
+            SqlDataReader reader = cmd.ExecuteReader();
+            List<User> users = new List<User>();
+            while (reader.Read())
+            {
+                User usr = new User();
+                usr.username = reader["usernameA"].ToString();
+                users.Add(usr);
+            }
+            reader.Close();
+            connect.Close();
+            return users;
+        }
+
+        public static List<User> DisplayFollowRequestsOfAUser(string username)
+        {
+            connect.Open();
+            SqlCommand cmd = new SqlCommand("", connect);
+            cmd.CommandText = "select * from followRequests where receiver=@username";
+            cmd.Parameters.AddWithValue("@username", username);
+            //cmd.CommandType = System.Data.CommandType.Text;
+            SqlDataReader reader = cmd.ExecuteReader();
+            List<User> users = new List<User>();
+            while (reader.Read())
+            {
+                User usr = new User();
+                usr.username = reader["sender"].ToString();
+                users.Add(usr);
+            }
+            reader.Close();
+            connect.Close();
+            return users;
+        }
+
+        public static void SendFollowRequest(string sender, string receiver)
+        {
+            connect.Open();
+            SqlCommand cmd = new SqlCommand("", connect);
+            cmd.CommandText = "insert into followRequests values(@usernameA, @usernameB)";
+            cmd.Parameters.AddWithValue("@usernameA", sender);
+            cmd.Parameters.AddWithValue("@usernameB", receiver);
+            cmd.ExecuteNonQuery();
+            connect.Close();
+        }
+
+        public static bool RequestSent(string usernameA, string usernameB)
+        {
+            connect.Open();
+            SqlCommand cmd = new SqlCommand("", connect);
+            cmd.CommandText = "select * from followRequests where sender = @usernameA and receiver = @usernameB";
+            cmd.Parameters.AddWithValue("@usernameA", usernameA);
+            cmd.Parameters.AddWithValue("@usernameB", usernameB);
+            SqlDataReader r=cmd.ExecuteReader();
+            if (r.Read())
+            {
+                r.Close();
+                connect.Close();
+                return true;
+            }
+
+            else
+            {
+                r.Close();
+                connect.Close();
+                return false;
+            }
+        }
+
+        public static void CancelFollowRequest(string sender, string receiver)
+        {
+            connect.Open();
+            SqlCommand cmd = new SqlCommand("", connect);
+            cmd.CommandText = "delete from followRequests where sender=@usernameA and receiver= @usernameB";
+            cmd.Parameters.AddWithValue("@usernameA", sender);
+            cmd.Parameters.AddWithValue("@usernameB", receiver);
+            cmd.ExecuteNonQuery();
+            connect.Close();
+        }
+
+        public static void AcceptFollowRequest(string sender, string receiver)
+        {
+            connect.Open();
+            SqlCommand cmd = new SqlCommand("", connect);
+            cmd.CommandText = "delete from followRequests where sender=@usernameA and receiver= @usernameB";
+            cmd.Parameters.AddWithValue("@usernameA", sender);
+            cmd.Parameters.AddWithValue("@usernameB", receiver);
+            cmd.ExecuteNonQuery();
+            cmd = new SqlCommand("NewFollower", connect);
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.Parameters.Add("@UserA", SqlDbType.VarChar, 30).Value = receiver;
+            cmd.Parameters.Add("@UserB", SqlDbType.VarChar, 30).Value = sender;
+            cmd.Parameters.Add("@Out", SqlDbType.Int).Direction = ParameterDirection.Output;
+            cmd.ExecuteNonQuery();
+            connect.Close();
+        }
+
+        public static bool IsFollowing(string usernameA, string usernameB)//does userA follow userB
+        {
+            connect.Open();
+            SqlCommand cmd = new SqlCommand("", connect);
+            cmd.CommandText = "select * from following where usernameA = @usernameB and usernameB = @usernameA";
+            cmd.Parameters.AddWithValue("@usernameA", usernameA);
+            cmd.Parameters.AddWithValue("@usernameB", usernameB);
+            SqlDataReader r = cmd.ExecuteReader();
+            if (r.Read())
+            {
+                r.Close();
+                connect.Close();
+                return true;
+            }
+
+            else
+            {
+                r.Close();
+                connect.Close();
+                return false;
+            }
+        }
+
+        public static void DeleteFollower(string followee, string follower)
+        {
+            connect.Open();
+            SqlCommand cmd = new SqlCommand("DeleteFollower", connect);
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.Parameters.Add("@UserA", SqlDbType.VarChar, 30).Value = followee;
+            cmd.Parameters.Add("@UserB", SqlDbType.VarChar, 30).Value = follower;
+            cmd.Parameters.Add("@Out", SqlDbType.Int).Direction = ParameterDirection.Output;
+            cmd.ExecuteNonQuery();
+            connect.Close();
         }
 
     }

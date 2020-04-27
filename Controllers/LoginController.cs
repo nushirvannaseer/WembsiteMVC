@@ -16,22 +16,30 @@ namespace Wembsite.Controllers
         // GET: Login
         public ActionResult Index()
         {
+            if (Session["username"] != null)
+                return RedirectToAction("../UserHome/Profile");
             // ViewBag.Message = "";
             return View();
         }
 
         //This is for the login page
         public ActionResult VerifyCredentials(string un, string upwd)
-        {
-            User usr = db.userList.Find(un);
-            if(usr==null || usr.password!=upwd)
+        {           
+            if(Session["username"]!=null)
+                return RedirectToAction("../UserHome/Profile");
+
+            User usr = CRUD.getUser(un);
+            if (usr==null || usr.password!=upwd)
             {
                 
                 ViewData["Message"] = "Invalid username or password!";
                 return View("Index");
             }
+            
+            Session["username"] = un;
+            dynamic user = CRUD.AnonymousObject(usr);
            
-            return RedirectToAction("../UserHome/Profile", usr);
+            return RedirectToAction("../UserHome/Profile");
         }
 
         //This is for the sign up page

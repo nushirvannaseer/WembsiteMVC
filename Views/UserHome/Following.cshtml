@@ -1,0 +1,29 @@
+﻿@using Wembsite.Models;
+@model IEnumerable<Wembsite.Models.User>
+
+@{
+    ViewBag.Title = "Following";
+}
+<h2>Following</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            usernames
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @item.username
+            </td>
+
+        </tr>
+    }
+
+</table>
+@Html.ActionLink("Back to Profile Page", "Profile")
+
+

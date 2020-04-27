@@ -10,7 +10,7 @@ namespace Wembsite.Controllers
     {
         public ActionResult Index()
         {
-            return View();
+            return RedirectToAction("../Login/Index");
         }
 
         public ActionResult About()

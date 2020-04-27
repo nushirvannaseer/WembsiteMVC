@@ -275,8 +275,6 @@
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
-    <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\Contact.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\Login\Index.cshtml" />
     <Content Include="Views\Login\SignUp.cshtml" />
@@ -285,10 +283,13 @@
     <Content Include="Views\Users\Details.cshtml" />
     <Content Include="Views\Users\Edit.cshtml" />
     <Content Include="Views\Users\Index.cshtml" />
-    <Content Include="Views\UserHome\Profile.cshtml" />
     <Content Include="Views\Login\ForgotPassword.cshtml" />
     <Content Include="Views\AllUsers\Index.cshtml" />
     <Content Include="Views\AllUsers\Edit.cshtml" />
+    <Content Include="Views\UserHome\Profile.cshtml" />
+    <Content Include="Views\UserHome\Followers.cshtml" />
+    <Content Include="Views\UserHome\Following.cshtml" />
+    <Content Include="Views\UserHome\FollowRequests.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

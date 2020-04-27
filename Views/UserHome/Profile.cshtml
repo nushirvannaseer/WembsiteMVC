@@ -1,11 +1,42 @@
-﻿@using Wembsite.Models
-@model Wembsite.Models.User
+﻿@model Wembsite.Models.User
 
-
-@{ 
-    ViewBag.Title = Model.firstname;
-
+@{
+    ViewBag.Title = "Profile";
 }
 
 <h2>Profile</h2>
 
+<div>
+    <h4>User</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Name: 
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.firstname) @Html.DisplayFor(model => model.lastname)
+        </dd>
+
+        <dt>
+            Email: 
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.email)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @*@Html.ActionLink("Edit", "Edit", new { id = Model.username }) |
+        @Html.ActionLink("Back to List", "Index")*@
+    @Html.ActionLink("View all Wembsiters", "../AllUsers/Index")<br />
+    @Html.ActionLink("Follow Requests", "FollowRequests", new { username = Model.username })<br />
+    @Html.ActionLink("Followers", "Followers", new { username = Model.username })<br />
+    @Html.ActionLink("Following", "Following", new { username = Model.username })<br />
+    @Html.ActionLink("Log out", "LogoutUser")<br/>
+
+
+
+</p>
