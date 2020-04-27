@@ -39,9 +39,7 @@ namespace Wembsite.Controllers
                 return View("Index");
             }
             
-            Session["username"] = un;
-            dynamic user = CRUD.AnonymousObject(usr);
-           
+            Session["username"] = un;           
             return RedirectToAction("../UserHome/Profile");
         }
 
