@@ -52,6 +52,7 @@ begin
     set @Out=0
 
     if exists (select * from Users where username=@username)
+    
     begin
         Delete from Users
         where username=@username
