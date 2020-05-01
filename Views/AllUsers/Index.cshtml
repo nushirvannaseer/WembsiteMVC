@@ -2,10 +2,11 @@
 @using Wembsite.Models;
 
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "All Wembsiters";
 }
 
-<h2>Index</h2>
+<h2>All Wembsiters</h2>
+<link href="../../Content/LoginStyles.css" rel="stylesheet" type="text/css" />
 
 <p>
     @Html.ActionLink("Create New", "Create")
@@ -13,16 +14,13 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.firstname)
+            Username
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.lastname)
+            Name
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.email)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.password)
+            Email
         </th>
         <th></th>
     </tr>
@@ -35,13 +33,10 @@
                 @Html.DisplayFor(modelItem => item.username)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.lastname)
+                @Html.DisplayFor(modelItem => item.firstname) @Html.DisplayFor(modelItem=>item.lastname)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.email)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.password)
             </td>
             <td>
 
@@ -59,16 +54,13 @@
                 {
                     @Html.ActionLink("Follow User", "../UserHome/SendFollowRequest", new { usernameB = item.username })
                 }
-
-
-
             </td>
             <td>
                 @if (Session["username"] != null && item.username == Session["username"].ToString())
                 {
-                    @Html.ActionLink("Edit | ", "Edit", new { username = item.username });
-                    @Html.ActionLink("Details | ", "Details", new { username = item.username });
-                    @Html.ActionLink("Delete | ", "Delete", new { username = item.username });
+                    Html.ActionLink("Edit | ", "Edit", new { username = item.username });
+                    Html.ActionLink("Details | ", "Details", new { username = item.username });
+                    Html.ActionLink("Delete | ", "Delete", new { username = item.username });
                 }
 
             </td>

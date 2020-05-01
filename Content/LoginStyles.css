@@ -6,6 +6,24 @@
     justify-content: center;
 }
 
+th {
+    color: darkred;
+    font-size: larger;
+}
+
+td {
+    color: black;
+    font-size: medium;
+    -webkit-text-stroke: 0.09px;
+    -webkit-text-stroke-color: blue;
+}
+
+dd {
+    color: black;
+    font-size: medium;
+    -webkit-text-stroke: 0.09px;
+    -webkit-text-stroke-color: blue;
+}
 
 h2 {
     color: #0b0b3b;
