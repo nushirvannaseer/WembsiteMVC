@@ -80,5 +80,16 @@ namespace Wembsite.Controllers
             List<User> users = CRUD.AllUsers();
             return View("../AllUsers/Index", users);
         }
+
+        public ActionResult CreateNewPost()
+        {
+            return View();
+        }
+
+        public ActionResult PublishPost(string postContent)
+        {
+            CRUD.NewPost(Session["username"].ToString(), postContent);
+            return RedirectToAction("Profile");
+        }
     }
 }

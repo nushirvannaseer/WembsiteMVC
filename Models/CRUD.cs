@@ -15,6 +15,7 @@ namespace Wembsite.Models
     {
         public static string connectionString = "data source=localhost; Initial Catalog=Wembsite;Integrated Security=true";
         public static SqlConnection connect = new SqlConnection(connectionString);
+        
         //public static List<User> getAllUsers()
         //{
         //    connect.Open();

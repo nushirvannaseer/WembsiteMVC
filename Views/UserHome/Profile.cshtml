@@ -31,6 +31,7 @@
 <p>
     @*@Html.ActionLink("Edit", "Edit", new { id = Model.username }) |
         @Html.ActionLink("Back to List", "Index")*@
+    @Html.ActionLink("Create a New Post", "CreateNewPost")<br />
     @Html.ActionLink("View all Wembsiters", "../AllUsers/Index")<br />
     @Html.ActionLink("Follow Requests", "FollowRequests", new { username = Model.username })<br />
     @Html.ActionLink("Followers", "Followers", new { username = Model.username })<br />
