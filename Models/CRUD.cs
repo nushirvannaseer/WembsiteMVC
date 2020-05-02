@@ -359,11 +359,14 @@ namespace Wembsite.Models
 
         public static List<UserContent> AllPostsOfAUser(string username)
         {
+
+
             connect.Open();
             SqlCommand cmd = new SqlCommand("", connect);
             cmd.CommandText = "select * from UserContent where username=@username order by DateCreation DESC";
             cmd.Parameters.AddWithValue("@username", username);
             SqlDataReader reader = cmd.ExecuteReader();
+
             List<UserContent> postList = new List<UserContent>();
             while(reader.Read())
             {
@@ -381,6 +384,36 @@ namespace Wembsite.Models
             connect.Close();
             reader.Close();
             return postList;
+        }
+
+        public static List<UserContent> HomepagePost(string username)
+        {
+            connect.Open();
+
+            SqlCommand cmd = new SqlCommand("homepage", connect);
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.Parameters.Add("@userID", SqlDbType.VarChar, 30).Value = username;
+            SqlDataReader reader = cmd.ExecuteReader();
+ 
+
+            List<UserContent> postList = new List<UserContent>();
+            while(reader.Read())
+            {
+                UserContent post = new UserContent();
+                post.contentID = Convert.ToInt32(reader["contentID"]);
+                post.username = reader["username"].ToString();
+                post.privacy = reader["privacy"].ToString();
+                post.DateCreation = Convert.ToDateTime(reader["DateCreation"]);
+                post.FileType = reader["FileType"].ToString();
+                post.RawData = reader["RawData"].ToString();
+
+                postList.Add(post);
+            }
+
+            connect.Close();
+            reader.Close();
+            return postList;
+ 
         }
 
         public static UserContent GetUserPost(int id)
