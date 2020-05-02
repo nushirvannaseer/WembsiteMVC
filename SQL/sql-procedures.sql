@@ -210,10 +210,10 @@ create PROCEDURE homepage
     @userID varchar(30)
 AS
     BEGIN
-        SELECT username, contentID, DateCreation, FileType, RawData
+        SELECT username, contentID, DateCreation, FileType, RawData, privacy
         from following as f 
             join UserContent as UC on f.usernameB=UC.username
-        where f.usernameA=@userID and privacy != 'Only Me'
-        order by DateCreation
+        where f.usernameB=@userID and privacy != 'Only Me'
+        order by DateCreation DESC
     end
 go
