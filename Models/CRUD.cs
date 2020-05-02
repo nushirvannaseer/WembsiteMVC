@@ -343,18 +343,91 @@ namespace Wembsite.Models
             connect.Close();
         }
 
-        public static void NewPost(string user, string post)
+        public static void NewPost(string user, string post, string privacy)
         {
+            
             connect.Open();
             SqlCommand cmd = new SqlCommand("AddPost", connect);
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
             cmd.Parameters.Add("@UName", SqlDbType.VarChar, 30).Value = user;
-            cmd.Parameters.Add("@privacy", SqlDbType.VarChar, 20).Value = "public";
-            cmd.Parameters.Add("@RData", SqlDbType.VarChar, 100).Value = post;
+            cmd.Parameters.Add("@privacy", SqlDbType.VarChar, 20).Value = privacy;
+            cmd.Parameters.Add("@RData", SqlDbType.VarChar, 8000).Value = post;
             cmd.Parameters.Add("@Out", SqlDbType.Int).Direction = ParameterDirection.Output;
             cmd.ExecuteNonQuery();
             connect.Close();
         }
 
+        public static List<UserContent> AllPostsOfAUser(string username)
+        {
+            connect.Open();
+            SqlCommand cmd = new SqlCommand("", connect);
+            cmd.CommandText = "select * from UserContent where username=@username order by DateCreation DESC";
+            cmd.Parameters.AddWithValue("@username", username);
+            SqlDataReader reader = cmd.ExecuteReader();
+            List<UserContent> postList = new List<UserContent>();
+            while(reader.Read())
+            {
+                UserContent post = new UserContent();
+                post.contentID = Convert.ToInt32(reader["contentID"]);
+                post.username = reader["username"].ToString();
+                post.privacy = reader["privacy"].ToString();
+                post.DateCreation = Convert.ToDateTime(reader["DateCreation"]);
+                post.FileType = reader["FileType"].ToString();
+                post.RawData = reader["RawData"].ToString();
+
+                postList.Add(post);
+            }
+
+            connect.Close();
+            reader.Close();
+            return postList;
+        }
+
+        public static UserContent GetUserPost(int id)
+        {
+            connect.Open();
+            SqlCommand cmd = new SqlCommand("", connect);
+            cmd.CommandText = "select * from UserContent where contentID=@contentID";
+            cmd.Parameters.AddWithValue("@contentID", id);
+            SqlDataReader reader = cmd.ExecuteReader();
+            UserContent post = new UserContent();
+            if (reader.Read())
+            {
+                post.contentID = Convert.ToInt32(reader["contentID"]);
+                post.username = reader["username"].ToString();
+                post.privacy = reader["privacy"].ToString();
+                post.DateCreation = Convert.ToDateTime(reader["DateCreation"]);
+                post.FileType = reader["FileType"].ToString();
+                post.RawData = reader["RawData"].ToString();
+            }
+
+            connect.Close();
+            reader.Close();
+            return post;
+        }
+
+        public static void EditPost(int id, string privacy, string RawData)
+        {
+            connect.Open();
+            SqlCommand cmd = new SqlCommand("EditPost", connect);
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.Parameters.Add("@contID", SqlDbType.Int).Value = id;
+            cmd.Parameters.Add("@privacy", SqlDbType.VarChar,20).Value = privacy;
+            cmd.Parameters.Add("@RawData", SqlDbType.VarChar, 8000).Value = RawData;
+            cmd.Parameters.Add("@Out", SqlDbType.Int).Direction = ParameterDirection.Output;
+            cmd.ExecuteNonQuery();
+            connect.Close();
+        }
+
+        public static void DeletePost(int id)
+        {
+            connect.Open();
+            SqlCommand cmd = new SqlCommand("DeletePost", connect);
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.Parameters.Add("@ContID", SqlDbType.Int).Value = id;
+            cmd.Parameters.Add("@Out", SqlDbType.Int).Direction = ParameterDirection.Output;
+            cmd.ExecuteNonQuery();
+            connect.Close();
+        }
     }
 }
