@@ -121,5 +121,11 @@ namespace Wembsite.Controllers
             CRUD.DeletePost(id);
             return RedirectToAction("AllPosts");
         }
+
+        public ActionResult HomePage()
+        {
+            List<UserContent> postList = CRUD.HomepagePost(Session["username"].ToString());
+            return View(postList);
+        }
     }
 }
