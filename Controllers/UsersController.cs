@@ -123,5 +123,11 @@ namespace Wembsite.Controllers
             }
             base.Dispose(disposing);
         }
+
+        public ActionResult AddPost(string id, string post)
+        {
+            //CRUD.NewPost(id, post);
+            return RedirectToAction("Index");
+        }
     }
 }
