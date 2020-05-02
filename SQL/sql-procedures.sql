@@ -202,3 +202,18 @@ as
 		select * from Users
 	end
 go
+
+--return posts on homepage of user
+drop PROCEDURE homepage
+GO
+create PROCEDURE homepage
+    @userID varchar(30)
+AS
+    BEGIN
+        SELECT username, contentID, DateCreation, FileType, RawData
+        from following as f 
+            join UserContent as UC on f.usernameB=UC.username
+        where f.usernameA=@userID and privacy != 'Only Me'
+        order by DateCreation
+    end
+go
