@@ -290,6 +290,10 @@
     <Content Include="Views\UserHome\Followers.cshtml" />
     <Content Include="Views\UserHome\Following.cshtml" />
     <Content Include="Views\UserHome\FollowRequests.cshtml" />
+    <Content Include="Views\UserHome\CreateNewPost.cshtml" />
+    <Content Include="Views\UserHome\AllPosts.cshtml" />
+    <Content Include="Views\UserHome\ViewPost.cshtml" />
+    <Content Include="Views\UserHome\EditPost.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

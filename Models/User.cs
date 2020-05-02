@@ -30,20 +30,30 @@ namespace Wembsite.Models
         }
     }
 
-    
+    public class UserContent
+    {
+        [Key]
+        public int contentID { get; set; }
+        public string username { get; set; }
+        public string privacy { get; set; }
+        public DateTime DateCreation { get; set; }
+        public string FileType { get; set; }
+        public string RawData { get; set; }
+
+        public UserContent() { }
+
+    }
+
     public class UserDBContext : DbContext
     {
         public DbSet<User> userList { get; set; }
     }
 
-    //public class UserFollowing : User
-    //{
-    //    [Key]
-    //    public int contentID { get; set; }
-    //    public bool onlyMe { get; set; }
-    //    public DateTime DateCreation { get; set; }
-    //    public string fileType { get; set; }
+    public class UserContentDBContext : DbContext
+    {
+        public DbSet<UserContent> userContentList { get; set; }
+    }
 
-    //}
+
 
 }

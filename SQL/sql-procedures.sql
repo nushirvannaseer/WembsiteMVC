@@ -94,17 +94,17 @@ go
 create procedure AddPost
     @UName varchar(30),
     @privacy varchar(20),
-    @RData varchar(100),
+    @RData varchar(8000),
 
     @Out int OUTPUT
 as
 begin
     declare @contID int,
         @FileT varchar(20),
-        @Dat date
+        @Dat datetime
 
     set @FileT='text'
-    set @Dat=CAST(GETDATE() AS DATE)
+    set @Dat=GETDATE()
     select @contID=count(*)+1 from UserContent
 
     set @Out=0
@@ -122,9 +122,8 @@ drop procedure EditPost
 go
 create procedure EditPost
        @contID int,
-       @FType varchar(20),
-       @RawData varchar(100),
-
+       @RawData varchar(8000),
+       @privacy varchar(20),
        @Out int OUTPUT
 as
 begin
@@ -133,7 +132,7 @@ begin
     begin
         update UserContent
         set RawData=@RawData,
-            FileType=@FType
+        privacy=@privacy
         where contentID=@contID
         set @Out=1
    end

@@ -80,5 +80,46 @@ namespace Wembsite.Controllers
             List<User> users = CRUD.AllUsers();
             return View("../AllUsers/Index", users);
         }
+
+        public ActionResult CreateNewPost()
+        {
+            return View();
+        }
+
+        public ActionResult PublishPost(string postContent, string privacy)
+        {
+            CRUD.NewPost(Session["username"].ToString(), postContent, privacy);
+            return RedirectToAction("Profile");
+        }
+
+        public ActionResult AllPosts()
+        {
+            List<UserContent> postList=CRUD.AllPostsOfAUser(Session["username"].ToString());
+            return View(postList);
+        }
+
+        public ActionResult ViewPost(int id)
+        {
+            UserContent post = CRUD.GetUserPost(id);
+            return View(post);
+        }
+
+        public ActionResult EditPost(int id)
+        {
+            UserContent post=CRUD.GetUserPost(id);
+            return View(post);
+        }
+
+        public ActionResult SaveEditChanges(int id, string privacy, string RawData)
+        {
+            CRUD.EditPost(id, privacy, RawData);
+            return RedirectToAction("AllPosts");
+        }
+
+        public ActionResult DeletePost(int id)
+        {
+            CRUD.DeletePost(id);
+            return RedirectToAction("AllPosts");
+        }
     }
 }

@@ -1,0 +1,45 @@
+﻿@model IEnumerable<Wembsite.Models.UserContent>
+
+@{
+    ViewBag.Title = "AllPosts";
+}
+
+<h2>All Posts</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.privacy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.DateCreation)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.RawData)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.privacy)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DateCreation)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.RawData)
+            </td>
+            <td>
+                @Html.ActionLink("View", "ViewPost", new { id = item.contentID }) |
+                @Html.ActionLink("Edit", "EditPost", new { id = item.contentID }) |
+                @Html.ActionLink("Delete", "DeletePost", new { id = item.contentID })
+            </td>
+        </tr>
+    }
+
+</table>
+<br />
+@Html.ActionLink("Back to Profile Page", "Profile")

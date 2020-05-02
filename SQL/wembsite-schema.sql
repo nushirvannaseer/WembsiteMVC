@@ -21,9 +21,9 @@ create table UserContent
     contentID int primary key,
     username varchar(30),
     privacy varchar(20) not null,
-    DateCreation date  not null,
+    DateCreation datetime  not null,
     FileType varchar(20) not null,
-    RawData varchar(100) not null,
+    RawData varchar(8000) not null,
 
     foreign key (username) references Users(username) on delete set null on update cascade
 
