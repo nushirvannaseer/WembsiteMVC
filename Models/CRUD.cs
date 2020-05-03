@@ -55,6 +55,10 @@ namespace Wembsite.Models
         //}
         public static int signUp(string username, string firstname, string lastname, string email, string password)
         {
+            if(connect.State==ConnectionState.Open)
+            {
+                connect.Close();
+            }
             connect.Open();
             SqlCommand cmd = new SqlCommand("NewUser", connect);
             int result = 0;
@@ -111,6 +115,10 @@ namespace Wembsite.Models
 
         public static List<User> AllUsers()
         {
+            if (connect.State == ConnectionState.Open)
+            {
+                connect.Close();
+            }
             connect.Open();
             SqlCommand cmd;
 
@@ -139,6 +147,11 @@ namespace Wembsite.Models
 
         public static User getUser(string username)
         {
+            if (connect.State == ConnectionState.Open)
+            {
+                connect.Close();
+            }
+            connect.Close();
             connect.Open();
             SqlCommand cmd = new SqlCommand("getUser", connect);
 
@@ -163,6 +176,10 @@ namespace Wembsite.Models
 
         public static void deleteUser(string username)
         {
+            if (connect.State == ConnectionState.Open)
+            {
+                connect.Close();
+            }
             connect.Open();
             SqlCommand cmd = new SqlCommand("DeleteUser", connect);
 
@@ -174,20 +191,12 @@ namespace Wembsite.Models
 
         }
 
-        public static User AnonymousObject(User usr)
-        {
-            return new User
-            {
-                username = usr.username,
-                firstname = usr.firstname,
-                lastname = usr.lastname,
-                email = usr.email,
-                password = usr.password
-            };
-        }
-
         public static List<User> DisplayFollowersOfAUser(string username)
         {
+            if (connect.State == ConnectionState.Open)
+            {
+                connect.Close();
+            }
             connect.Open();
             SqlCommand cmd = new SqlCommand("", connect);
             cmd.CommandText = "select * from following where usernameA=@username";
@@ -208,6 +217,10 @@ namespace Wembsite.Models
 
         public static List<User> DisplayFollowingsOfAUser(string username)
         {
+            if (connect.State == ConnectionState.Open)
+            {
+                connect.Close();
+            }
             connect.Open();
             SqlCommand cmd = new SqlCommand("", connect);
             cmd.CommandText = "select * from following where usernameB=@username";
@@ -228,6 +241,10 @@ namespace Wembsite.Models
 
         public static List<User> DisplayFollowRequestsOfAUser(string username)
         {
+            if (connect.State == ConnectionState.Open)
+            {
+                connect.Close();
+            }
             connect.Open();
             SqlCommand cmd = new SqlCommand("", connect);
             cmd.CommandText = "select * from followRequests where receiver=@username";
@@ -248,6 +265,10 @@ namespace Wembsite.Models
 
         public static void SendFollowRequest(string sender, string receiver)
         {
+            if (connect.State == ConnectionState.Open)
+            {
+                connect.Close();
+            }
             connect.Open();
             SqlCommand cmd = new SqlCommand("", connect);
             cmd.CommandText = "insert into followRequests values(@usernameA, @usernameB)";
@@ -259,6 +280,10 @@ namespace Wembsite.Models
 
         public static bool RequestSent(string usernameA, string usernameB)
         {
+            if (connect.State == ConnectionState.Open)
+            {
+                connect.Close();
+            }
             connect.Open();
             SqlCommand cmd = new SqlCommand("", connect);
             cmd.CommandText = "select * from followRequests where sender = @usernameA and receiver = @usernameB";
@@ -282,6 +307,10 @@ namespace Wembsite.Models
 
         public static void CancelFollowRequest(string sender, string receiver)
         {
+            if (connect.State == ConnectionState.Open)
+            {
+                connect.Close();
+            }
             connect.Open();
             SqlCommand cmd = new SqlCommand("", connect);
             cmd.CommandText = "delete from followRequests where sender=@usernameA and receiver= @usernameB";
@@ -293,6 +322,10 @@ namespace Wembsite.Models
 
         public static void AcceptFollowRequest(string sender, string receiver)
         {
+            if (connect.State == ConnectionState.Open)
+            {
+                connect.Close();
+            }
             connect.Open();
             SqlCommand cmd = new SqlCommand("", connect);
             cmd.CommandText = "delete from followRequests where sender=@usernameA and receiver= @usernameB";
@@ -310,6 +343,10 @@ namespace Wembsite.Models
 
         public static bool IsFollowing(string usernameA, string usernameB)//does userA follow userB
         {
+            if (connect.State == ConnectionState.Open)
+            {
+                connect.Close();
+            }
             connect.Open();
             SqlCommand cmd = new SqlCommand("", connect);
             cmd.CommandText = "select * from following where usernameA = @usernameB and usernameB = @usernameA";
@@ -333,6 +370,10 @@ namespace Wembsite.Models
 
         public static void DeleteFollower(string followee, string follower)
         {
+            if (connect.State == ConnectionState.Open)
+            {
+                connect.Close();
+            }
             connect.Open();
             SqlCommand cmd = new SqlCommand("DeleteFollower", connect);
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
@@ -345,7 +386,10 @@ namespace Wembsite.Models
 
         public static void NewPost(string user, string post, string privacy)
         {
-            
+            if (connect.State == ConnectionState.Open)
+            {
+                connect.Close();
+            }
             connect.Open();
             SqlCommand cmd = new SqlCommand("AddPost", connect);
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
@@ -359,8 +403,10 @@ namespace Wembsite.Models
 
         public static List<UserContent> AllPostsOfAUser(string username)
         {
-
-
+            if (connect.State == ConnectionState.Open)
+            {
+                connect.Close();
+            }
             connect.Open();
             SqlCommand cmd = new SqlCommand("", connect);
             cmd.CommandText = "select * from UserContent where username=@username order by DateCreation DESC";
@@ -377,6 +423,7 @@ namespace Wembsite.Models
                 post.DateCreation = Convert.ToDateTime(reader["DateCreation"]);
                 post.FileType = reader["FileType"].ToString();
                 post.RawData = reader["RawData"].ToString();
+                post.likes = Convert.ToInt32(reader["likes"]);
 
                 postList.Add(post);
             }
@@ -388,6 +435,10 @@ namespace Wembsite.Models
 
         public static List<UserContent> HomepagePost(string username)
         {
+            if (connect.State == ConnectionState.Open)
+            {
+                connect.Close();
+            }
             connect.Open();
 
             SqlCommand cmd = new SqlCommand("homepage", connect);
@@ -406,6 +457,7 @@ namespace Wembsite.Models
                 post.DateCreation = Convert.ToDateTime(reader["DateCreation"]);
                 post.FileType = reader["FileType"].ToString();
                 post.RawData = reader["RawData"].ToString();
+                post.likes = Convert.ToInt32(reader["likes"]);
 
                 postList.Add(post);
             }
@@ -418,6 +470,10 @@ namespace Wembsite.Models
 
         public static UserContent GetUserPost(int id)
         {
+            if (connect.State == ConnectionState.Open)
+            {
+                connect.Close();
+            }
             connect.Open();
             SqlCommand cmd = new SqlCommand("", connect);
             cmd.CommandText = "select * from UserContent where contentID=@contentID";
@@ -432,6 +488,7 @@ namespace Wembsite.Models
                 post.DateCreation = Convert.ToDateTime(reader["DateCreation"]);
                 post.FileType = reader["FileType"].ToString();
                 post.RawData = reader["RawData"].ToString();
+                post.likes = Convert.ToInt32(reader["likes"]);
             }
 
             connect.Close();
@@ -441,6 +498,10 @@ namespace Wembsite.Models
 
         public static void EditPost(int id, string privacy, string RawData)
         {
+            if (connect.State == ConnectionState.Open)
+            {
+                connect.Close();
+            }
             connect.Open();
             SqlCommand cmd = new SqlCommand("EditPost", connect);
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
@@ -454,6 +515,10 @@ namespace Wembsite.Models
 
         public static void DeletePost(int id)
         {
+            if (connect.State == ConnectionState.Open)
+            {
+                connect.Close();
+            }
             connect.Open();
             SqlCommand cmd = new SqlCommand("DeletePost", connect);
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
@@ -461,6 +526,67 @@ namespace Wembsite.Models
             cmd.Parameters.Add("@Out", SqlDbType.Int).Direction = ParameterDirection.Output;
             cmd.ExecuteNonQuery();
             connect.Close();
+        }
+
+        public static void LikePost(int contentID, string postOwner, string likedBy )
+        {
+            if (connect.State == ConnectionState.Open)
+            {
+                connect.Close();
+            }
+            connect.Open();
+            SqlCommand cmd = new SqlCommand("likePost", connect);
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.Parameters.Add("@likedBy", SqlDbType.VarChar, 30).Value = likedBy;
+            cmd.Parameters.Add("@contentID", SqlDbType.Int).Value = contentID;
+            cmd.Parameters.Add("@postOwner", SqlDbType.VarChar, 30).Value = postOwner;
+
+            cmd.ExecuteNonQuery();
+            connect.Close();
+        }
+
+        public static void UnLikePost(int contentID, string postOwner, string unlikedBy)
+        {
+            if (connect.State == ConnectionState.Open)
+            {
+                connect.Close();
+            }
+            connect.Open();
+            SqlCommand cmd = new SqlCommand("unlikePost", connect);
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.Parameters.Add("@unlikedBy", SqlDbType.VarChar, 30).Value = unlikedBy;
+            cmd.Parameters.Add("@contentID", SqlDbType.Int).Value = contentID;
+            cmd.Parameters.Add("@postOwner", SqlDbType.VarChar, 30).Value = postOwner;
+
+            cmd.ExecuteNonQuery();
+            connect.Close();
+        }
+
+        public static List<User> GetLikeList(int contentID, string postOwner)
+        {
+            if (connect.State == ConnectionState.Open)
+            {
+                connect.Close();
+            }
+            connect.Open();
+            SqlCommand cmd = new SqlCommand("GetLikeList", connect);
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.Parameters.Add("@postOwner", SqlDbType.VarChar, 30).Value = postOwner;
+            cmd.Parameters.Add("@contentID", SqlDbType.Int).Value = contentID;
+            SqlDataReader r= cmd.ExecuteReader();
+            List<User> likers = new List<User>();
+
+            while(r.Read())
+            {
+                User usr = new User();
+                usr.username = r["likedBy"].ToString();
+                likers.Add(usr);
+            }
+            r.Close();
+            connect.Close();
+
+            return likers;
+            
         }
     }
 }
