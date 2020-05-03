@@ -14,20 +14,6 @@ create table Users
 
     primary key(username),
 )
-
-
-create table UserContent
-(
-    contentID int primary key,
-    username varchar(30),
-    privacy varchar(20) not null,
-    DateCreation datetime  not null,
-    FileType varchar(20) not null,
-    RawData varchar(8000) not null,
-
-    foreign key (username) references Users(username) on delete set null on update cascade
-
-);
 go
 
 create table following
@@ -48,14 +34,48 @@ add CONSTRAINT UB_FK
     foreign key (usernameB) references Users(username) --on delete set null on update cascade;
 go
 
-create table shared
+drop table UserContent
+go
+
+create table UserContent
 (
-    contentID int,
+    contentID int primary key,
     username varchar(30),
+    privacy varchar(20) not null,
+    DateCreation datetime  not null,
+    FileType varchar(20) not null,
+    RawData varchar(8000) not null,
+	likes int
 
     foreign key (username) references Users(username) on delete set null on update cascade,
+
+);
+go
+
+create table likes
+(
+    contentID int,
+    likedBy varchar(30),
+	postOwner varchar(30),
+
+    foreign key (postOwner) references Users(username) on delete set null on update cascade,
+	foreign key (likedBy) references Users(username) on delete no action on update no action,
     foreign key (contentID) references UserContent(contentID) 
 );
+go
+
+create table comments
+(
+	contentID int,
+	commentedBy varchar(30),
+	postOwner varchar(30),
+	commentText varchar(3000),
+
+	foreign key (postOwner) references Users(username) on delete set null on update cascade,
+	foreign key (commentedBy) references Users(username) on delete no action on update no action,
+    foreign key (contentID) references UserContent(contentID),
+);
+go
 
 create table followRequests
 (
