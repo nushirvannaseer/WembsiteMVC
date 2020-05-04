@@ -1,0 +1,56 @@
+﻿@model IEnumerable<Wembsite.Models.UserContent>
+@using Wembsite.Models;
+
+@{
+    ViewBag.Title = "Home Page";
+}
+
+
+
+<h2>Home Page</h2>
+<link href="../../Content/LoginStyles.css" rel="stylesheet" type="text/css" />
+
+@foreach (var item in Model)
+{
+<div>
+    @Html.ActionLink(item.username, "ViewFollowedProfile", new { username = item.username })<br />
+    <text style="font-size:smaller">@item.privacy       @item.DateCreation</text>
+    <br />
+    <text style="font-family:Arial;-webkit-text-stroke:thin;-webkit-text-stroke-color:black;color:black;font-size:medium">
+        @item.RawData
+    </text>
+    <br />
+    <div id="@item.contentID.ToString()">
+        @{
+            Html.RenderPartial("_LikesPartialView", item);
+        }
+    </div>
+    @Ajax.ActionLink("Liked By", "GetLikeList",
+                     new { contentID = item.contentID, postOwner=item.username},
+                      new AjaxOptions()
+                      {
+                          UpdateTargetId = item.contentID.ToString()+"likeList",
+                          InsertionMode = InsertionMode.Replace,
+                          HttpMethod = "Post"
+                      })
+    @{ 
+        var id = @item.contentID.ToString() + "likeList";
+    }
+    <div id="@id">
+        @*@{
+            User usr = CRUD.getUser(item.username);
+            Html.RenderPartial("_LikeListPartialView", usr);
+        }*@
+    </div>
+
+    <hr />
+</div>
+
+
+}
+
+@Html.ActionLink("Back to Profile Page", "Profile")
+
+
+
+

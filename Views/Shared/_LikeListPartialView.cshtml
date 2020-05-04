@@ -1,0 +1,15 @@
+﻿@model IEnumerable<Wembsite.Models.User>
+
+
+
+<table class="table">
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td style="color:black; font-size:small">
+                @Html.DisplayFor(modelItem => item.username)
+            </td>
+        </tr>
+    }
+
+</table>

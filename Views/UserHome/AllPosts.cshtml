@@ -5,6 +5,7 @@
 }
 
 <h2>All Posts</h2>
+<link href="../../Content/LoginStyles.css" rel="stylesheet" type="text/css" />
 
 <table class="table">
     <tr>
@@ -15,6 +16,9 @@
             @Html.DisplayNameFor(model => model.DateCreation)
         </th>
         <th>
+            @Html.DisplayNameFor(model => model.likes)
+        </th>
+        <th>
             @Html.DisplayNameFor(model => model.RawData)
         </th>
         <th></th>
@@ -22,22 +26,25 @@
 
     @foreach (var item in Model)
     {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.privacy)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DateCreation)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.RawData)
-            </td>
-            <td>
-                @Html.ActionLink("View", "ViewPost", new { id = item.contentID }) |
-                @Html.ActionLink("Edit", "EditPost", new { id = item.contentID }) |
-                @Html.ActionLink("Delete", "DeletePost", new { id = item.contentID })
-            </td>
-        </tr>
+<tr>
+    <td>
+        @Html.DisplayFor(modelItem => item.privacy)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.DateCreation)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.likes)
+    </td>
+    <td>
+        @Html.DisplayFor(modelItem => item.RawData)
+    </td>
+    <td>
+        @Html.ActionLink("View", "ViewPost", new { id = item.contentID }) |
+        @Html.ActionLink("Edit", "EditPost", new { id = item.contentID }) |
+        @Html.ActionLink("Delete", "DeletePost", new { id = item.contentID })
+    </td>
+</tr>
     }
 
 </table>

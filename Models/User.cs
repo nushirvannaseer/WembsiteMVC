@@ -39,6 +39,7 @@ namespace Wembsite.Models
         public DateTime DateCreation { get; set; }
         public string FileType { get; set; }
         public string RawData { get; set; }
+        public int likes { get; set; }
 
         public UserContent() { }
 
