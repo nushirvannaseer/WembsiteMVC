@@ -263,3 +263,25 @@ begin
 	where contentID=@contentID and postOwner=@postOwner
 end
 go
+
+drop PROCEDURE userProfile
+go
+create PROCEDURE userProfile
+    @ProfileUserID varchar(30),
+    @CurrentUserID varchar(30)
+AS
+BEGIN
+    --public posts
+    select* from UserContent as UN
+    where username=@ProfileUserID and privacy='Public'
+
+    UNION
+    --friend only posts
+    select* from UserContent as UN
+    where username=@ProfileUserID and privacy='Only My Followers'
+        and exists (
+            select usernameA
+            from following
+            where [following].usernameB=@CurrentUserID
+                and [following].usernameA=@ProfileUserID)
+end
