@@ -496,6 +496,41 @@ namespace Wembsite.Models
             return post;
         }
 
+        public static List<UserContent> GetUserProfilePosts(string currentUser, string ProfileUser)
+        {
+            if (connect.State == ConnectionState.Open)
+            {
+                connect.Close();
+            }
+            connect.Open();
+
+            SqlCommand cmd = new SqlCommand("userProfile", connect);
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.Parameters.Add("@ProfileUserID", SqlDbType.VarChar, 30).Value = ProfileUser;
+            cmd.Parameters.Add("@CurrentUserID", SqlDbType.VarChar, 30).Value = currentUser;
+            SqlDataReader reader = cmd.ExecuteReader();
+
+
+            List<UserContent> postList = new List<UserContent>();
+            while (reader.Read())
+            {
+                UserContent post = new UserContent();
+                post.contentID = Convert.ToInt32(reader["contentID"]);
+                post.username = reader["username"].ToString();
+                post.privacy = reader["privacy"].ToString();
+                post.DateCreation = Convert.ToDateTime(reader["DateCreation"]);
+                post.FileType = reader["FileType"].ToString();
+                post.RawData = reader["RawData"].ToString();
+                post.likes = Convert.ToInt32(reader["likes"]);
+
+                postList.Add(post);
+            }
+
+            connect.Close();
+            reader.Close();
+            return postList;
+        }
+
         public static void EditPost(int id, string privacy, string RawData)
         {
             if (connect.State == ConnectionState.Open)
