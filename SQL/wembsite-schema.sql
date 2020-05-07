@@ -66,12 +66,11 @@ go
 
 create table comments
 (
+    commentID int primary key,
 	contentID int,
 	commentedBy varchar(30),
-	postOwner varchar(30),
 	commentText varchar(3000),
 
-	foreign key (postOwner) references Users(username) on delete set null on update cascade,
 	foreign key (commentedBy) references Users(username) on delete no action on update no action,
     foreign key (contentID) references UserContent(contentID),
 );

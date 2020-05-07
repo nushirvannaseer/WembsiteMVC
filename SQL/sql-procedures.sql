@@ -263,3 +263,26 @@ begin
 	where contentID=@contentID and postOwner=@postOwner
 end
 go
+
+create PROCEDURE addComment
+    @postID int,
+    @userIDD varchar(30),
+    @text varchar(3000),
+
+    @out int OUTPUT
+AS
+BEGIN
+    set @out=0
+
+    if not exists(select* from UserContent where ContentID=@postID)
+        and not exists(select* from Users where username=@userIDD)
+    begin
+        declare @commmentID INT
+        select @commmentID=count(*)+1
+        from comments
+
+        insert into comments
+            values(@commmentID, @postID, @userIDD, @text)
+        set @out=1
+    end
+end
