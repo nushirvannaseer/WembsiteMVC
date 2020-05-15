@@ -56,9 +56,7 @@ create table likes
 (
     contentID int,
     likedBy varchar(30),
-	postOwner varchar(30),
 
-    foreign key (postOwner) references Users(username) on delete set null on update cascade,
 	foreign key (likedBy) references Users(username) on delete no action on update no action,
     foreign key (contentID) references UserContent(contentID) 
 );
