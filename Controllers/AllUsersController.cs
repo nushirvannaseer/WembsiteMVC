@@ -28,5 +28,11 @@ namespace Wembsite.Controllers
             List<User> users = CRUD.AllUsers();
             return View("Index", users);
         }
+        public ActionResult NonSessionUserProfile(string username)
+        {
+            User nonSessionUser = CRUD.getUser(username);
+
+            return View(nonSessionUser);
+        }
     }
 }

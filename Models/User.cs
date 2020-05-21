@@ -48,6 +48,8 @@ namespace Wembsite.Models
     public class UserDBContext : DbContext
     {
         public DbSet<User> userList { get; set; }
+
+        public System.Data.Entity.DbSet<Wembsite.Models.UserContent> UserContents { get; set; }
     }
 
     public class UserContentDBContext : DbContext

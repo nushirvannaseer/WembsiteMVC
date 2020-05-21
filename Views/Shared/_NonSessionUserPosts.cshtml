@@ -1,0 +1,47 @@
+﻿@model IEnumerable<Wembsite.Models.UserContent>
+
+@using Wembsite.Models
+@{
+    Layout = null;
+}
+
+@foreach (var item in Model)
+{
+    <div>
+        @Html.ActionLink(item.username, "../AllUsers/NonSessionUserProfile", new { username = item.username })<br />
+        <text style="font-size:smaller">@item.privacy       @item.DateCreation</text>
+        <br />
+        <text style="font-family:Arial;-webkit-text-stroke:thin;-webkit-text-stroke-color:black;color:black;font-size:medium">
+            @item.RawData
+        </text>
+        <br />
+        <div id="@item.contentID.ToString()">
+            @{
+                Html.RenderPartial("_NSULikesPartialView", item);
+            }
+        </div>
+        @Ajax.ActionLink("Liked By", "../UserHome/GetLikeList",
+                         new { contentID = item.contentID },
+                          new AjaxOptions()
+                          {
+                              UpdateTargetId = item.contentID.ToString() + "likeList",
+                              InsertionMode = InsertionMode.Replace,
+                              HttpMethod = "Post"
+                          })
+        @{
+            var id = @item.contentID.ToString() + "likeList";
+        }
+        <div id="@id">
+            @*@{
+                    User usr = CRUD.getUser(item.username);
+                    Html.RenderPartial("_LikeListPartialView", usr);
+                }*@
+        </div>
+
+        <hr />
+    </div>
+
+
+}
+
+@Html.ActionLink("Back to Profile Page", "../UserHome/Profile")

@@ -223,8 +223,7 @@ go
 
 create procedure [likePost]
 	@likedBy varchar(30),
-	@contentID int,
-	@postOwner varchar(30)
+	@contentID int
 as
 	begin
 		if not exists (select * from likes 
@@ -232,7 +231,7 @@ as
 						)
 			begin
 				insert into likes
-				values(@contentID, @likedBy, @postOwner)
+				values(@contentID, @likedBy)
 				update UserContent
 				set UserContent.likes=UserContent.likes+1
 				where contentID=@contentID
@@ -242,8 +241,7 @@ as
 go
 create procedure unlikePost
     @unlikedBy varchar(30),
-    @contentID int,
-    @postOwner varchar(30)
+    @contentID int
 as 
     BEGIN   
         delete from likes where contentID=@contentID and likedBy=@unlikedBy
@@ -253,13 +251,44 @@ as
     END
 go
 
+drop procedure getNonSessionUserPosts
+GO
+create procedure getNonSessionUserPosts
+	@username varchar(30),
+	@sessionUserIsFollowing int
 
+	as begin
+		if @sessionUserIsFollowing=1
+			begin
+			select * from UserContent 
+			where username=@username and privacy!='Only Me'
+			end
+		else
+			begin
+			select * from UserContent
+			where username=@username and privacy='Public'
+			end
+		end
+go
+
+drop PROCEDURE GetLikeList
+go
 create procedure GetLikeList
-	@contentID int,
-	@postOwner varchar(30)
+	@contentID int
 as
 begin
 	select * from likes
-	where contentID=@contentID and postOwner=@postOwner
+	where contentID=@contentID
 end
 go
+
+drop PROCEDURE Search
+go
+create procedure Search
+	@searchText varchar(100)
+
+	as 
+	begin
+		select username from [Users]
+		where username like '%'+@searchText+'%'
+	end
