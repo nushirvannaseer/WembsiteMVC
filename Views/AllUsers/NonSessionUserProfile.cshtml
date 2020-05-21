@@ -1,0 +1,37 @@
+﻿@model Wembsite.Models.User
+@using Wembsite.Models
+
+@{
+    ViewBag.Title = "Wembsite";
+}
+
+<h2>@Model.username</h2>
+<link href="../../Content/LoginStyles.css" rel="stylesheet" type="text/css" />
+
+<div>
+    <h4>User</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.firstname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.firstname)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.lastname)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.lastname)
+        </dd>
+
+    </dl>
+</div>
+<div>
+    @{
+            Html.RenderPartial("_NonSessionUserPosts", CRUD.getNonSessionUserPosts(Model.username, Session["username"].ToString()));
+    }
+</div>

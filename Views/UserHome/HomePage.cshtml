@@ -13,7 +13,7 @@
 @foreach (var item in Model)
 {
 <div>
-    @Html.ActionLink(item.username, "ViewFollowedProfile", new { username = item.username })<br />
+    @Html.ActionLink(item.username, "../AllUsers/NonSessionUserProfile", new { username = item.username })<br />
     <text style="font-size:smaller">@item.privacy       @item.DateCreation</text>
     <br />
     <text style="font-family:Arial;-webkit-text-stroke:thin;-webkit-text-stroke-color:black;color:black;font-size:medium">
@@ -26,7 +26,7 @@
         }
     </div>
     @Ajax.ActionLink("Liked By", "GetLikeList",
-                     new { contentID = item.contentID, postOwner=item.username},
+                     new { contentID = item.contentID},
                       new AjaxOptions()
                       {
                           UpdateTargetId = item.contentID.ToString()+"likeList",

@@ -7,6 +7,10 @@ using System.Web.Http;
 using System.Data.SqlClient;
 using System.Data.Sql;
 using System.Data;
+using System.Data.Entity;
+using System.Web;
+using System.Web.Mvc;
+using Wembsite.Models;
 
 
 namespace Wembsite.Models
@@ -528,7 +532,7 @@ namespace Wembsite.Models
             connect.Close();
         }
 
-        public static void LikePost(int contentID, string postOwner, string likedBy )
+        public static void LikePost(int contentID, string likedBy )
         {
             if (connect.State == ConnectionState.Open)
             {
@@ -539,13 +543,12 @@ namespace Wembsite.Models
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
             cmd.Parameters.Add("@likedBy", SqlDbType.VarChar, 30).Value = likedBy;
             cmd.Parameters.Add("@contentID", SqlDbType.Int).Value = contentID;
-            cmd.Parameters.Add("@postOwner", SqlDbType.VarChar, 30).Value = postOwner;
 
             cmd.ExecuteNonQuery();
             connect.Close();
         }
 
-        public static void UnLikePost(int contentID, string postOwner, string unlikedBy)
+        public static void UnLikePost(int contentID, string unlikedBy)
         {
             if (connect.State == ConnectionState.Open)
             {
@@ -556,13 +559,12 @@ namespace Wembsite.Models
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
             cmd.Parameters.Add("@unlikedBy", SqlDbType.VarChar, 30).Value = unlikedBy;
             cmd.Parameters.Add("@contentID", SqlDbType.Int).Value = contentID;
-            cmd.Parameters.Add("@postOwner", SqlDbType.VarChar, 30).Value = postOwner;
 
             cmd.ExecuteNonQuery();
             connect.Close();
         }
 
-        public static List<User> GetLikeList(int contentID, string postOwner)
+        public static List<User> GetLikeList(int contentID)
         {
             if (connect.State == ConnectionState.Open)
             {
@@ -571,7 +573,6 @@ namespace Wembsite.Models
             connect.Open();
             SqlCommand cmd = new SqlCommand("GetLikeList", connect);
             cmd.CommandType = System.Data.CommandType.StoredProcedure;
-            cmd.Parameters.Add("@postOwner", SqlDbType.VarChar, 30).Value = postOwner;
             cmd.Parameters.Add("@contentID", SqlDbType.Int).Value = contentID;
             SqlDataReader r= cmd.ExecuteReader();
             List<User> likers = new List<User>();
@@ -587,6 +588,73 @@ namespace Wembsite.Models
 
             return likers;
             
+        }
+
+        public static List<UserContent> getNonSessionUserPosts(string username, string sessionUser)
+        {
+            int sessionUserIsFollower = 0;
+            if (connect.State == ConnectionState.Open)
+            {
+                connect.Close();
+            }
+            connect.Open();
+            SqlCommand cmd = new SqlCommand("getNonSessionUserPosts", connect);
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.Parameters.Add("@username", SqlDbType.VarChar, 30).Value = username;
+            if (IsFollowing(sessionUser, username))
+            {
+                sessionUserIsFollower = 1;
+            }
+            cmd.Parameters.Add("@sessionUserIsFollowing", SqlDbType.Int).Value = sessionUserIsFollower;
+            if (connect.State == ConnectionState.Open)
+            {
+                connect.Close();
+            }
+            connect.Open();
+            SqlDataReader r = cmd.ExecuteReader();
+            List<UserContent> posts = new List<UserContent>();
+
+            while (r.Read())
+            {
+                UserContent post = new UserContent();
+                post.contentID = Convert.ToInt32( r["contentID"]);
+                post.username = r["username"].ToString();
+                post.likes = Convert.ToInt32(r["likes"]);
+                post.DateCreation = Convert.ToDateTime(r["DateCreation"]);
+                post.privacy = r["privacy"].ToString();
+                post.RawData = r["RawData"].ToString();
+
+                posts.Add(post);
+            }
+            r.Close();
+            connect.Close();
+
+            return posts;
+        }
+
+        public static List<User> Search(string searchText)
+        {
+            if (connect.State == ConnectionState.Open)
+            {
+                connect.Close();
+            }
+            connect.Open();
+            SqlCommand cmd = new SqlCommand("Search", connect);
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.Parameters.Add("@searchText", SqlDbType.VarChar, 50).Value = searchText;
+            SqlDataReader r = cmd.ExecuteReader();
+            List<User> likers = new List<User>();
+
+            while (r.Read())
+            {
+                User usr = new User();
+                usr.username = r["username"].ToString();
+                likers.Add(usr);
+            }
+            r.Close();
+            connect.Close();
+
+            return likers;
         }
     }
 }

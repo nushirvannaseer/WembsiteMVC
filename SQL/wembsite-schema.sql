@@ -1,5 +1,5 @@
 create database wembsite;
-
+go
 use wembsite;
 
 go
@@ -56,11 +56,9 @@ create table likes
 (
     contentID int,
     likedBy varchar(30),
-	postOwner varchar(30),
 
-    foreign key (postOwner) references Users(username) on delete set null on update cascade,
-	foreign key (likedBy) references Users(username) on delete no action on update no action,
-    foreign key (contentID) references UserContent(contentID) 
+	foreign key (likedBy) references Users(username) on delete set null on update cascade,
+    foreign key (contentID) references UserContent(contentID) on delete set null on update no action
 );
 go
 
@@ -72,7 +70,7 @@ create table comments
 	commentText varchar(3000),
 
 	foreign key (commentedBy) references Users(username) on delete no action on update no action,
-    foreign key (contentID) references UserContent(contentID),
+    foreign key (contentID) references UserContent(contentID)  on delete no action on update no action
 );
 go
 

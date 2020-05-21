@@ -10,7 +10,7 @@
 <table class="table">
     <tr>
         <th>
-            usernames
+            Users
         </th>
     </tr>
 
@@ -18,7 +18,7 @@
     {
         <tr>
             <td>
-                @item.username
+                @Html.ActionLink(item.username, "../AllUsers/NonSessionUserProfile", new { username = item.username })
             </td>
             <td>
                 @Html.ActionLink("Accept Request", "AcceptFollowRequest", new { sender = item.username })

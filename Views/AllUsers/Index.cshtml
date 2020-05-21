@@ -30,7 +30,7 @@
 
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.username)
+                @Html.ActionLink(item.username, "NonSessionUserProfile", new { username=item.username})
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.firstname) @Html.DisplayFor(modelItem=>item.lastname)

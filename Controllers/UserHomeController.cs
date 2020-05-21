@@ -129,25 +129,42 @@ namespace Wembsite.Controllers
             return View(postList);
         }
 
-        public ActionResult LikePost(int contentID, string postOwner, string likedBy)
+        public ActionResult LikePost(int contentID, string likedBy)
         {
             int originalLikes = Convert.ToInt32(CRUD.GetUserPost(contentID).likes);
-            CRUD.LikePost(contentID, postOwner, likedBy);
+            CRUD.LikePost(contentID, likedBy);
             ViewData["Message"] = "Unlike";
             //if like was already present
             if (originalLikes== Convert.ToInt32(CRUD.GetUserPost(contentID).likes))
             {
-                CRUD.UnLikePost(contentID, postOwner, likedBy);
+                CRUD.UnLikePost(contentID, likedBy);
                 ViewData["Message"] = "Like";
             }
             UserContent post = CRUD.GetUserPost(contentID);
             return PartialView("_LikesPartialView", post);
         }
 
-        public ActionResult GetLikeList(int contentID, string postOwner)
+        public ActionResult GetLikeList(int contentID)
         {
-            List<User> likers = CRUD.GetLikeList(contentID, postOwner);
+            List<User> likers = CRUD.GetLikeList(contentID);
             return PartialView("_LikeListPartialView", likers);
+        }
+
+        public ActionResult _NonSessionUserPosts(string username)
+        {
+            List<UserContent> posts = CRUD.getNonSessionUserPosts(username, Session["username"].ToString());
+            return View(posts);
+        }
+
+        public ActionResult Search(string searchText)
+        {
+            if (searchText == "")
+            {
+                return RedirectToAction("Profile");
+            }
+            ViewData["searchText"] = searchText;
+            List<User> searchResults = CRUD.Search(searchText);
+            return View("SearchResults", searchResults);
         }
     }
 }

@@ -22,7 +22,7 @@
     }
 }
 
-@Ajax.ActionLink(ViewData["Message"].ToString(), "LikePost",
+@Ajax.ActionLink(ViewData["Message"].ToString(), "../UserHome/LikePost",
                          new { contentID = Model.contentID, likedBy = Session["username"].ToString() },
                           new AjaxOptions()
                           {
