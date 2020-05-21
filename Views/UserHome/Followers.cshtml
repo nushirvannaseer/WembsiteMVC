@@ -1,0 +1,31 @@
+﻿
+
+@using Wembsite.Models;
+@model IEnumerable<Wembsite.Models.User>
+
+@{
+    ViewBag.Title = "Followers";
+}
+    <link href="../../Content/LoginStyles.css" rel="stylesheet" type="text/css" />
+<h2>Followers</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Users
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.ActionLink(@item.username, "../AllUsers/NonSessionUserProfile", new { username = item.username })
+            </td>
+
+        </tr>
+    }
+
+</table>
+@Html.ActionLink("Back to Profile Page", "Profile")
+

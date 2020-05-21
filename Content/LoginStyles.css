@@ -1,0 +1,155 @@
+﻿body {
+    background-image: url(sharedBG.jpg);
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+th {
+    color: darkred;
+    font-size: larger;
+}
+
+td {
+    color: black;
+    font-size: medium;
+    -webkit-text-stroke: 0.09px;
+    -webkit-text-stroke-color: blue;
+}
+
+dd {
+    color: black;
+    font-size: medium;
+    -webkit-text-stroke: 0.09px;
+    -webkit-text-stroke-color: blue;
+}
+
+h2 {
+    color: #0b0b3b;
+    font-family: 'Trebuchet MS';
+    font-style: italic;
+}
+
+h1 {
+    color: #0b0b3b;
+    font-family: 'Trebuchet MS';
+    font-style: italic;
+}
+
+.label {
+    color: midnightblue;
+    border-color: black;
+    font-size: medium;
+    font-family: 'Trebuchet MS';
+}
+
+.inputField {
+    width: 60%;
+    height: 35px;
+    border-radius: 18px;
+    padding-left: 7px;
+    padding-right: 7px;
+    margin-bottom: 30px;
+    transition: 0.4s;
+    border-color: transparent;
+    border-width: 2px;
+    border-style: solid;
+}
+
+    .inputField:hover {
+        width: 65%;
+        border-color: midnightblue;
+    }
+
+.inputField_Signup {
+    width: 60%;
+    height: 35px;
+    border-radius: 18px;
+    padding-left: 7px;
+    padding-right: 7px;
+    transition: 0.4s;
+    border-color: transparent;
+    border-width: 2px;
+    border-style: solid;
+}
+
+    .inputField_signup:hover {
+        width: 65%;
+        border-color: midnightblue;
+    }
+
+.loginForm {
+    background: rgb(255,255,255,0.4);
+    width: 30%;
+    height: 600px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 25px;
+    border-style: solid;
+    border-color: transparent;
+    margin-top: 35px;
+}
+
+.signupForm {
+    background: rgb(255,255,255,0.4);
+    width: 30%;
+    height: 610px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 25px;
+    border-style: solid;
+    border-color: transparent;
+    margin-top: 35px;
+}
+
+a {
+    color: darkblue;
+    stroke: white;
+    stroke-width: 5px;
+    stroke-opacity: 100;
+    -webkit-text-stroke-color: black;
+    font-size: large;
+    font-family: 'Trebuchet MS';
+}
+
+text {
+    color: darkblue;
+    stroke: white;
+    stroke-width: 5px;
+    stroke-opacity: 100;
+    -webkit-text-stroke-color: blacqqk;
+    font-size: large;
+    font-family: 'Trebuchet MS';
+}
+
+input {
+    border-radius: 5px;
+}
+
+button {
+    background-color: darkblue;
+    border: 2px solid rgb(196,158,83);
+    border-radius: 5px;
+    height: 50px;
+    width: 120px;
+    margin-left: 10px;
+    margin-top: 20px;
+    resize: horizontal;
+    color: gold;
+    transition: 0.7s;
+    border-radius: 40px;
+    /* -ms-transform: rotate(20deg); /* IE 9 */
+}
+
+    button:hover {
+        background-color: rgb(196,158,83); /* Green */
+        color: darkblue;
+        box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+        border: 2px solid darkblue;
+        transform: rotate(360deg); /* Standard syntax */
+    }

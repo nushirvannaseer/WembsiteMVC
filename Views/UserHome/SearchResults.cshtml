@@ -1,0 +1,24 @@
+﻿@model IEnumerable<Wembsite.Models.User>
+
+@{
+    ViewBag.Title = "Search Results";
+}
+
+<h2>Search Results for "@ViewData["searchText"].ToString()":</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Usernames
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.ActionLink(item.username, "../AllUsers/NonSessionUserProfile", new { username=item.username})
+        </td>
+    </tr>
+}
+
+</table>

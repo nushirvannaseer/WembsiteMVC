@@ -1,0 +1,65 @@
+﻿@model Wembsite.Models.UserContent
+
+@{
+    ViewBag.Title = "ViewPost";
+}
+
+<h2>ViewPost</h2>
+<link href="../../Content/LoginStyles.css" rel="stylesheet" type="text/css" />
+
+<div>
+    <h4>UserContent</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.username)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.username)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.privacy)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.privacy)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.DateCreation)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.DateCreation)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FileType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FileType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.RawData)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.RawData)
+        </dd>
+
+        <dd>
+            @Html.DisplayFor(model => model.RawData.Length)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "EditPost", new { id = Model.contentID }) |
+    @Html.ActionLink("Back to List", "AllPosts")
+</p>
+
+@Html.ActionLink("Back to Profile Page", "Profile")

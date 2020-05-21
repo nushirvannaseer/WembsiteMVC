@@ -1,0 +1,35 @@
+﻿@model Wembsite.Models.UserContent
+@using Wembsite.Models
+@{
+    Layout = null;
+}
+
+@{
+    if (ViewData["Message"] == null)
+    {
+        var originalLikes = Convert.ToInt32(CRUD.GetUserPost(Model.contentID).likes);
+        CRUD.LikePost(Model.contentID, Session["username"].ToString());
+        if (originalLikes + 1 == Convert.ToInt32(CRUD.GetUserPost(Model.contentID).likes))
+        {
+            CRUD.UnLikePost(Model.contentID, Session["username"].ToString());
+            ViewData["Message"] = "Like";
+        }
+
+        else
+        {
+            ViewData["Message"] = "Unlike";
+        }
+    }
+}
+
+@Ajax.ActionLink(ViewData["Message"].ToString(), "LikePost",
+                         new { contentID = Model.contentID, likedBy = Session["username"].ToString() },
+                          new AjaxOptions()
+                          {
+                              UpdateTargetId = Model.contentID.ToString(),
+                              InsertionMode = InsertionMode.Replace,
+                              HttpMethod = "Post"
+                          })
+
+
+<text>@Model.likes</text>

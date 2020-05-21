@@ -1,0 +1,35 @@
+﻿@using Wembsite.Models;
+@model IEnumerable<Wembsite.Models.User>
+@{
+    ViewBag.Title = "Follow Requests";
+}
+
+<h2>Follow Requests</h2>
+<link href="../../Content/LoginStyles.css" rel="stylesheet" type="text/css" />
+
+<table class="table">
+    <tr>
+        <th>
+            Users
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.ActionLink(item.username, "../AllUsers/NonSessionUserProfile", new { username = item.username })
+            </td>
+            <td>
+                @Html.ActionLink("Accept Request", "AcceptFollowRequest", new { sender = item.username })
+            </td>
+            <td>
+            @Html.ActionLink("Delete Request", "DeleteFollowRequest", new { sender = item.username })
+            </td>
+
+        </tr>
+    }
+
+</table>
+@Html.ActionLink("Back to Profile Page", "Profile")
+
