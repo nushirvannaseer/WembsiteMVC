@@ -282,11 +282,13 @@ begin
 end
 go
 
+drop PROCEDURE Search
+go
 create procedure Search
 	@searchText varchar(100)
 
 	as 
 	begin
-		select username from [User]
+		select username from [Users]
 		where username like '%'+@searchText+'%'
 	end

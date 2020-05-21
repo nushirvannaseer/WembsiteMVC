@@ -605,7 +605,7 @@ namespace Wembsite.Models
             {
                 sessionUserIsFollower = 1;
             }
-            cmd.Parameters.Add("@sessionUserIsFollower", SqlDbType.Int).Value = sessionUserIsFollower;
+            cmd.Parameters.Add("@sessionUserIsFollowing", SqlDbType.Int).Value = sessionUserIsFollower;
             if (connect.State == ConnectionState.Open)
             {
                 connect.Close();
