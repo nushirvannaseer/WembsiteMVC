@@ -303,6 +303,7 @@
     <Content Include="Views\Shared\_NonSessionUserPosts.cshtml" />
     <Content Include="Views\Shared\_NSULikesPartialView.cshtml" />
     <Content Include="Views\UserHome\SearchResults.cshtml" />
+    <Content Include="Views\Shared\_Comment.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

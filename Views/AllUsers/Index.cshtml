@@ -42,17 +42,17 @@
 
                 @if (Session["username"] != null && CRUD.RequestSent(Session["username"].ToString(), item.username) == true)
                 {
-                    @Html.ActionLink("Cancel Request", "../UserHome/CancelFollowRequest", new { usernameB = item.username });
+                    @Html.ActionLink("Cancel Request", "../UserHome/CancelFollowRequest", new { usernameB = item.username, source="../AllUSers/Index" });
                 }
 
                 else if (Session["username"] != null && CRUD.IsFollowing(Session["username"].ToString(), item.username))
                 {
-                    @Html.ActionLink("Unfollow User", "../UserHome/DeleteFollower", new { followee = item.username });
+                    @Html.ActionLink("Unfollow User", "../UserHome/DeleteFollower", new { followee = item.username, source = "../AllUSers/Index" });
                 }
 
                 else if (Session["username"] != null && item.username != Session["username"].ToString())
                 {
-                    @Html.ActionLink("Follow User", "../UserHome/SendFollowRequest", new { usernameB = item.username })
+                    @Html.ActionLink("Follow User", "../UserHome/SendFollowRequest", new { usernameB = item.username, source = "../AllUSers/Index" })
                 }
             </td>
             <td>

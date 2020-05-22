@@ -12,44 +12,67 @@
 
 @foreach (var item in Model)
 {
-<div>
-    @Html.ActionLink(item.username, "../AllUsers/NonSessionUserProfile", new { username = item.username })<br />
-    <text style="font-size:smaller">@item.privacy       @item.DateCreation</text>
-    <br />
-    <text style="font-family:Arial;-webkit-text-stroke:thin;-webkit-text-stroke-color:black;color:black;font-size:medium">
-        @item.RawData
-    </text>
-    <br />
-    <div id="@item.contentID.ToString()">
+    <div>
+        @Html.ActionLink(item.username, "../AllUsers/NonSessionUserProfile", new { username = item.username })
+        <br />
+        <text style="font-size:smaller">@item.privacy       @item.DateCreation</text>
+        <br />
+        <text style="font-family:Arial;-webkit-text-stroke:thin;-webkit-text-stroke-color:black;color:black;font-size:medium">
+            @item.RawData
+        </text>
+        <br />
+        <div id="@item.contentID.ToString()">
+            @{
+                Html.RenderPartial("_LikesPartialView", item);
+            }
+        </div>
+        @Ajax.ActionLink("Liked By", "GetLikeList",
+                         new { contentID = item.contentID },
+                          new AjaxOptions()
+                          {
+                              UpdateTargetId = item.contentID.ToString() + "likeList",
+                              InsertionMode = InsertionMode.Replace,
+                              HttpMethod = "Post"
+                          })
         @{
-            Html.RenderPartial("_LikesPartialView", item);
+            var id = @item.contentID.ToString() + "likeList";
+        }
+        <div id="@id">
+
+        </div>
+        <hr /><text>Comments:<br /></text>
+        @{
+            var id2 = @item.contentID.ToString() + "commentList";
+        }
+        @{
+            Html.RenderPartial("_Comment", CRUD.GetCommentsOfAPost(item.contentID), new ViewDataDictionary { { "ContentID", item.contentID.ToString() } });
+        }
+        <div id="@id2">
+        </div>
+        @using (Ajax.BeginForm("AddComment", "UserHome", new { contentID = id2 }, new AjaxOptions
+        {
+            HttpMethod = "post",
+            UpdateTargetId = id2,
+            InsertionMode = InsertionMode.Replace,
+        }
+        ))
+        {
+            <input id="commentText" name="commentText" value="" placeholder="Write a comment..." />
+            <input type="submit" class="btn" value="Post Comment" />
         }
     </div>
-    @Ajax.ActionLink("Liked By", "GetLikeList",
-                     new { contentID = item.contentID},
-                      new AjaxOptions()
-                      {
-                          UpdateTargetId = item.contentID.ToString()+"likeList",
-                          InsertionMode = InsertionMode.Replace,
-                          HttpMethod = "Post"
-                      })
-    @{ 
-        var id = @item.contentID.ToString() + "likeList";
-    }
-    <div id="@id">
-        @*@{
-            User usr = CRUD.getUser(item.username);
-            Html.RenderPartial("_LikeListPartialView", usr);
-        }*@
-    </div>
-
     <hr />
-</div>
-
-
 }
 
 @Html.ActionLink("Back to Profile Page", "Profile")
+
+@*<script>
+    onsubmit(){
+        $("#formAddressShipping form").trigger('submit');
+        $("#formAddressShipping form").unbind('submit');
+        return true;
+    }
+</script>*@
 
 
 

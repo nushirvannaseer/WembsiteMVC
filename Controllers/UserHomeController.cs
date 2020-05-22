@@ -40,32 +40,47 @@ namespace Wembsite.Controllers
             return View("FollowRequests", users);
         }
 
-        public ActionResult SendFollowRequest(string usernameB)
+        public ActionResult SendFollowRequest(string usernameB, string source)
         {
             CRUD.SendFollowRequest( Session["username"].ToString(), usernameB);
+            if (source == "../AllUsers/NonSessionUserProfile")
+                return View(source, CRUD.getUser(usernameB));
             List<User> users = CRUD.AllUsers();
-            return View("../AllUsers/Index", users);
+            return View(source, users);
         }
 
-        public ActionResult CancelFollowRequest(string usernameB)
+        public ActionResult CancelFollowRequest(string usernameB, string source)
         {
             CRUD.CancelFollowRequest(Session["username"].ToString(), usernameB);
+            if (source == "../AllUsers/NonSessionUserProfile")
+                return View(source, CRUD.getUser(usernameB));
             List<User> users = CRUD.AllUsers();
-            return View("../AllUsers/Index", users);
+            return View(source, users);
         }
 
-        public ActionResult AcceptFollowRequest(string sender)
+        public ActionResult AcceptFollowRequest(string sender, string source)
         {
             CRUD.AcceptFollowRequest(sender, Session["username"].ToString());
+            if (source == "FollowRequests")
+            {
+                List<User> u = CRUD.DisplayFollowRequestsOfAUser(Session["username"].ToString());
+                return View(source, u);
+            }
+               
             List<User> users = CRUD.AllUsers();
-            return View("../AllUsers/Index", users);
+            return View(source, users);
         }
 
-        public ActionResult DeleteFollowRequest(string sender)
+        public ActionResult DeleteFollowRequest(string sender, string source)
         {
             CRUD.CancelFollowRequest(sender, Session["username"].ToString());
+            if (source == "FollowRequests")
+            {
+                List<User> u = CRUD.DisplayFollowRequestsOfAUser(Session["username"].ToString());
+                return View(source, u);
+            }
             List<User> users = CRUD.AllUsers();
-            return View("../AllUsers/Index", users);
+            return View(source, users);
         }
 
         public ActionResult LogoutUser()
@@ -74,11 +89,15 @@ namespace Wembsite.Controllers
             return RedirectToAction("../Login/Index");
         }
 
-        public ActionResult DeleteFollower(string followee)
+        public ActionResult DeleteFollower(string followee, string source)
         {
             CRUD.DeleteFollower(followee, Session["username"].ToString());
+            if (source == "../AllUsers/NonSessionUserProfile")
+            {
+                return View(source, CRUD.getUser(followee));
+            }
             List<User> users = CRUD.AllUsers();
-            return View("../AllUsers/Index", users);
+            return View(source, users);
         }
 
         public ActionResult CreateNewPost()
@@ -165,6 +184,19 @@ namespace Wembsite.Controllers
             ViewData["searchText"] = searchText;
             List<User> searchResults = CRUD.Search(searchText);
             return View("SearchResults", searchResults);
+        }
+
+        public ActionResult AddComment(string commentText, string contentID)
+        {
+            var cID = ""; int i = 0;
+            while(contentID[i]>=48 && contentID[i]<=57)
+            {
+                cID += contentID[i];
+                i++;
+            }
+            CRUD.AddComment(Convert.ToInt32(cID), Session["username"].ToString(), commentText);
+            ViewData["ContentID"] = cID;
+            return PartialView("_Comment", CRUD.GetCommentsOfAPost(Convert.ToInt32(cID)));
         }
     }
 }

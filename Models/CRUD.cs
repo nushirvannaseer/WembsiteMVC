@@ -11,7 +11,7 @@ using System.Data.Entity;
 using System.Web;
 using System.Web.Mvc;
 using Wembsite.Models;
-
+using System.Web.UI.WebControls;
 
 namespace Wembsite.Models
 {
@@ -656,5 +656,52 @@ namespace Wembsite.Models
 
             return likers;
         }
+
+        public static List<Comment> GetCommentsOfAPost(int contentID)
+        {
+            if (connect.State == ConnectionState.Open)
+            {
+                connect.Close();
+            }
+            connect.Open();
+            SqlCommand cmd = new SqlCommand("getCommentsOfAPost", connect);
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.Parameters.Add("@contentID", SqlDbType.Int).Value = contentID;
+            SqlDataReader r = cmd.ExecuteReader();
+            List<Comment> cmnts = new List<Comment>();
+
+            while (r.Read())
+            {
+                Comment cmnt = new Comment();
+                cmnt.commentedBy = r["commentedBy"].ToString();
+                cmnt.commentID=Convert.ToInt32(r["commentID"]);
+                cmnt.contentID = Convert.ToInt32 (r["contentID"]);
+                cmnt.commentText = r["commentText"].ToString();
+                cmnts.Add(cmnt);
+            }
+            r.Close();
+            connect.Close();
+
+            return cmnts;
+        }
+
+        public static List<Comment> AddComment(int contentID, string commentedBy, string commentText)
+        {
+            if (connect.State == ConnectionState.Open)
+            {
+                connect.Close();
+            }
+            connect.Open();
+            SqlCommand cmd = new SqlCommand("addComment", connect);
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.Parameters.Add("@postID", SqlDbType.Int).Value = contentID;
+            cmd.Parameters.Add("@userIDD", SqlDbType.VarChar, 30).Value = commentedBy;
+            cmd.Parameters.Add("@text", SqlDbType.VarChar, 3000).Value = commentText;
+            cmd.Parameters.Add("@Out", SqlDbType.Int).Value = ParameterDirection.Output;
+            cmd.ExecuteNonQuery();
+            connect.Close();
+
+            return GetCommentsOfAPost(contentID);
+    }
     }
 }

@@ -32,6 +32,22 @@
 </div>
 <div>
     @{
-            Html.RenderPartial("_NonSessionUserPosts", CRUD.getNonSessionUserPosts(Model.username, Session["username"].ToString()));
+        if (CRUD.RequestSent(Session["username"].ToString(), Model.username) == true)
+        {
+            @Html.ActionLink("Cancel Request", "../UserHome/CancelFollowRequest", new { usernameB = Model.username, source = "../AllUsers/NonSessionUserProfile"});
+        }
+
+        else if (CRUD.IsFollowing(Session["username"].ToString(), Model.username))
+        {
+            @Html.ActionLink("Unfollow User", "../UserHome/DeleteFollower", new { followee = Model.username, source = "../AllUsers/NonSessionUserProfile" });
+        }
+
+        else if (Model.username != Session["username"].ToString())
+        {
+            @Html.ActionLink("Follow User", "../UserHome/SendFollowRequest", new { usernameB = Model.username, source = "../AllUsers/NonSessionUserProfile" })
+        }
+        
+        <br />
+        Html.RenderPartial("_NonSessionUserPosts", CRUD.getNonSessionUserPosts(Model.username, Session["username"].ToString()));
     }
 </div>

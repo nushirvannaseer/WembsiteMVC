@@ -30,6 +30,8 @@ namespace Wembsite.Controllers
         }
         public ActionResult NonSessionUserProfile(string username)
         {
+            if (username == Session["username"].ToString())
+                return RedirectToAction("../UserHome/Profile");
             User nonSessionUser = CRUD.getUser(username);
 
             return View(nonSessionUser);

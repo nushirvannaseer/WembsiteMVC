@@ -1,0 +1,19 @@
+﻿@model IEnumerable<Wembsite.Models.Comment>
+
+
+@{
+    string x = "";
+    if (ViewData["ContentID"].ToString() != null)
+    {
+        x = ViewData["ContentID"].ToString();
+    }
+}
+
+@foreach (var item in Model)
+{
+    x = item.contentID.ToString();
+    <div id="@item.commentID.ToString()">
+        <text style="font-size:medium; color:black">@item.commentedBy: </text>
+        <text style="font-size:smaller">@item.commentText</text>
+    </div>
+}

@@ -292,3 +292,33 @@ create procedure Search
 		select username from [Users]
 		where username like '%'+@searchText+'%'
 	end
+go
+
+drop procedure addComment
+go
+create PROCEDURE addComment
+    @postID int,
+    @userIDD varchar(30),
+    @text varchar(3000),
+
+    @out int OUTPUT
+AS
+BEGIN
+    set @out=0
+        declare @commmentID INT
+        select @commmentID=count(*)+1
+        from comments
+
+        insert into comments
+            values(@commmentID, @postID, @userIDD, @text)
+        set @out=1
+end
+go
+
+create procedure getCommentsOfAPost
+	@contentID int
+	as
+		begin
+		select * from comments 
+		where contentID=@contentID
+		end

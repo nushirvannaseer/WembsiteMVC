@@ -21,10 +21,10 @@
                 @Html.ActionLink(item.username, "../AllUsers/NonSessionUserProfile", new { username = item.username })
             </td>
             <td>
-                @Html.ActionLink("Accept Request", "AcceptFollowRequest", new { sender = item.username })
+                @Html.ActionLink("Accept Request", "AcceptFollowRequest", new { sender = item.username, source="FollowRequests" })
             </td>
             <td>
-            @Html.ActionLink("Delete Request", "DeleteFollowRequest", new { sender = item.username })
+            @Html.ActionLink("Delete Request", "DeleteFollowRequest", new { sender = item.username, source="FollowRequests" })
             </td>
 
         </tr>

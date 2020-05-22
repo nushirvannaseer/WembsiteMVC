@@ -45,6 +45,18 @@ namespace Wembsite.Models
 
     }
 
+    public class Comment
+    {
+        [Key]
+        public int commentID { get; set; }
+        public int contentID { get; set; }
+        public string commentedBy { get; set; }
+        public string commentText { get; set; }
+
+        public Comment() { }
+
+    }
+
     public class UserDBContext : DbContext
     {
         public DbSet<User> userList { get; set; }
@@ -55,6 +67,11 @@ namespace Wembsite.Models
     public class UserContentDBContext : DbContext
     {
         public DbSet<UserContent> userContentList { get; set; }
+    }
+
+    public class CommentDBContext : DbContext
+    {
+        public DbSet<Comment> commentList { get; set; }
     }
 
 
