@@ -5,68 +5,38 @@
     ViewBag.Title = "All Wembsiters";
 }
 
-<h2>All Wembsiters</h2>
-<link href="../../Content/LoginStyles.css" rel="stylesheet" type="text/css" />
+<h2 style="color:white">All Wembsiters</h2>
+<link href="../../Content/material.css" rel="stylesheet" type="text/css" />
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            Username
-        </th>
-        <th>
-            Name
-        </th>
-        <th>
-            Email
-        </th>
-        <th></th>
-    </tr>
-
+<div class="card" style="padding:20px 20px 20px 20px">     
     @foreach (var item in Model)
     {
+    <div class="card" style="background-color:rgb(46, 46, 46);padding:0px 20px 20px 20px">
+        <br />
+        <label style="color: mediumpurple">Username: </label>
+        @Html.ActionLink(item.username, "NonSessionUserProfile", new { username = item.username })
+        <br />
+        <label style="color:mediumpurple">Name: </label>
+        <label style="color:white">@item.firstname @item.lastname </label><br />
+        <label style="color:mediumpurple">Email: </label>
+        <label style="color:mediumpurple">@item.email </label><br />
+        @if (Session["username"] != null && CRUD.RequestSent(Session["username"].ToString(), item.username) == true)
+        {
+            @Html.ActionLink("Cancel Request", "../UserHome/CancelFollowRequest", new { usernameB = item.username, source = "../AllUSers/Index" });
+        }
 
-        <tr>
-            <td>
-                @Html.ActionLink(item.username, "NonSessionUserProfile", new { username=item.username})
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.firstname) @Html.DisplayFor(modelItem=>item.lastname)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.email)
-            </td>
-            <td>
+        else if (Session["username"] != null && CRUD.IsFollowing(Session["username"].ToString(), item.username))
+        {
+            @Html.ActionLink("Unfollow User", "../UserHome/DeleteFollower", new { followee = item.username, source = "../AllUSers/Index" });
+        }
 
-                @if (Session["username"] != null && CRUD.RequestSent(Session["username"].ToString(), item.username) == true)
-                {
-                    @Html.ActionLink("Cancel Request", "../UserHome/CancelFollowRequest", new { usernameB = item.username, source="../AllUSers/Index" });
-                }
-
-                else if (Session["username"] != null && CRUD.IsFollowing(Session["username"].ToString(), item.username))
-                {
-                    @Html.ActionLink("Unfollow User", "../UserHome/DeleteFollower", new { followee = item.username, source = "../AllUSers/Index" });
-                }
-
-                else if (Session["username"] != null && item.username != Session["username"].ToString())
-                {
-                    @Html.ActionLink("Follow User", "../UserHome/SendFollowRequest", new { usernameB = item.username, source = "../AllUSers/Index" })
-                }
-            </td>
-            <td>
-                @if (Session["username"] != null && item.username == Session["username"].ToString())
-                {
-                    Html.ActionLink("Edit | ", "Edit", new { username = item.username });
-                    Html.ActionLink("Details | ", "Details", new { username = item.username });
-                    Html.ActionLink("Delete | ", "Delete", new { username = item.username });
-                }
-
-            </td>
-        </tr>
+        else if (Session["username"] != null && item.username != Session["username"].ToString())
+        {
+            @Html.ActionLink("Follow User", "../UserHome/SendFollowRequest", new { usernameB = item.username, source = "../AllUSers/Index" })
+        }
+    </div>
     }
 
-</table>
+</div>
 
 @Html.ActionLink("Back to Profile Page", "../UserHome/Profile")

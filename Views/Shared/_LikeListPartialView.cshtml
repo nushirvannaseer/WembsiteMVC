@@ -2,14 +2,12 @@
 
 
 
-<table class="table">
+
     @foreach (var item in Model)
     {
         <tr>
-            <td style="color:black; font-size:small">
+            <td style="color:rgb(201, 201, 201); font-size:small">
                 @Html.DisplayFor(modelItem => item.username)
             </td>
         </tr>
     }
-
-</table>

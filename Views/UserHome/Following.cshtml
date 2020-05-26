@@ -4,27 +4,18 @@
 @{
     ViewBag.Title = "Following";
 }
-<h2>Following</h2>
-<link href="../../Content/LoginStyles.css" rel="stylesheet" type="text/css" />
+<h2 style="color:white">Following</h2>
+<link href="../../Content/material.css" rel="stylesheet" type="text/css" />
 
-<table class="table">
-    <tr>
-        <th>
-            Users
-        </th>
-    </tr>
-
+<div class="card" style="padding:0px 20px 20px 20px">
+    <br />
     @foreach (var item in Model)
     {
-        <tr>
-            <td>
-                @Html.ActionLink(item.username, "../AllUsers/NonSessionUserProfile", new { username = item.username })
-            </td>
-
-        </tr>
+        @Html.ActionLink(item.username, "../AllUsers/NonSessionUserProfile", new { username = item.username })
+        <br />
     }
 
-</table>
+</div>
 @Html.ActionLink("Back to Profile Page", "Profile")
 
 

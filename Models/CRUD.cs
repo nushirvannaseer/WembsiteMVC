@@ -12,6 +12,7 @@ using System.Web;
 using System.Web.Mvc;
 using Wembsite.Models;
 using System.Web.UI.WebControls;
+using System.IO;
 
 namespace Wembsite.Models
 {
@@ -388,7 +389,7 @@ namespace Wembsite.Models
             connect.Close();
         }
 
-        public static void NewPost(string user, string post, string privacy)
+        public static void NewPost(string user, string post, string privacy, string path="", string FileT="")
         {
             if (connect.State == ConnectionState.Open)
             {
@@ -400,6 +401,9 @@ namespace Wembsite.Models
             cmd.Parameters.Add("@UName", SqlDbType.VarChar, 30).Value = user;
             cmd.Parameters.Add("@privacy", SqlDbType.VarChar, 20).Value = privacy;
             cmd.Parameters.Add("@RData", SqlDbType.VarChar, 8000).Value = post;
+            cmd.Parameters.Add("@filepath", SqlDbType.VarChar, 300).Value = path;
+            cmd.Parameters.Add("@FileT", SqlDbType.VarChar, 20).Value = FileT;
+
             cmd.Parameters.Add("@Out", SqlDbType.Int).Direction = ParameterDirection.Output;
             cmd.ExecuteNonQuery();
             connect.Close();
@@ -428,7 +432,7 @@ namespace Wembsite.Models
                 post.FileType = reader["FileType"].ToString();
                 post.RawData = reader["RawData"].ToString();
                 post.likes = Convert.ToInt32(reader["likes"]);
-
+                post.filePath = reader["filePath"].ToString();
                 postList.Add(post);
             }
 
@@ -462,7 +466,7 @@ namespace Wembsite.Models
                 post.FileType = reader["FileType"].ToString();
                 post.RawData = reader["RawData"].ToString();
                 post.likes = Convert.ToInt32(reader["likes"]);
-
+                post.filePath = reader["filePath"].ToString();
                 postList.Add(post);
             }
 
@@ -493,6 +497,7 @@ namespace Wembsite.Models
                 post.FileType = reader["FileType"].ToString();
                 post.RawData = reader["RawData"].ToString();
                 post.likes = Convert.ToInt32(reader["likes"]);
+                post.filePath = reader["filePath"].ToString();
             }
 
             connect.Close();
@@ -623,6 +628,7 @@ namespace Wembsite.Models
                 post.DateCreation = Convert.ToDateTime(r["DateCreation"]);
                 post.privacy = r["privacy"].ToString();
                 post.RawData = r["RawData"].ToString();
+                post.filePath = r["filePath"].ToString();
 
                 posts.Add(post);
             }

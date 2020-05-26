@@ -1,26 +1,28 @@
 ﻿@model Wembsite.Models.User
 
 @{
-    ViewBag.Title = "createNewPost";
+    ViewBag.Title = "Create New Post";
 }
 
 
-<h2>Create a New Post</h2>
-<link href="../../Content/LoginStyles.css" rel="stylesheet" type="text/css" />
-<form onsubmit="" method="post" action="../../UserHome/PublishPost">
-    <div>
-        <text>Post Content:</text>
+<h2 style="color:white">Create a New Post</h2>
+<link href="../../Content/material.css" rel="stylesheet" type="text/css" />
+<form onsubmit="" method="post" action="../../UserHome/PublishPost" enctype="multipart/form-data">
+    <div class="createNewPost" style="padding-top:0px"><br />
+        <text style="color:white">Post Content:</text>
         <br />
-        <textarea maxlength="30000" name="postContent" style="width:2000px; height:200px"></textarea>
+        <textarea maxlength="30000" name="postContent" style="border-radius:10px; width:2000px; height:200px"></textarea>
         <br />
-        <text>Privacy: </text><br />
+        <text style="color:white">Privacy: </text><br />
         
-        <input type="radio" name="privacy" id="Public" value="Public" />
-        <label for="Public">Public</label><br />
-        <input type="radio" name="privacy" id="Only My Followers" value="Only My Followers" />
-        <label for="Only My Followers">Only My Followers</label><br />
-        <input type="radio" name="privacy" id="Only Me" value="Only Me" />
-        <label for="Only Me">Only Me</label><br />
+        <input  type="radio" name="privacy" id="Public" value="Public" required />
+        <label style="color:white" for="Public">Public</label><br />
+        <input type="radio" name="privacy" id="Only My Followers" value="Only My Followers" required />
+        <label style="color:white" for="Only My Followers">Only My Followers</label><br />
+        <input type="radio" name="privacy" id="Only Me" value="Only Me" required/>
+        <label style="color:white" for="Only Me">Only Me</label><br /><br />
+        <text style="color:white">Attach an image:</text>
+        <input class="button" style="width:200px" type="file" name="file" />
         <button name="createPostBtn" type="submit">Post</button>
     </div>
 </form>

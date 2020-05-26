@@ -4,32 +4,24 @@
     ViewBag.Title = "Follow Requests";
 }
 
-<h2>Follow Requests</h2>
-<link href="../../Content/LoginStyles.css" rel="stylesheet" type="text/css" />
+<h2 style="color:white">Follow Requests</h2>
+<link href="../../Content/material.css" rel="stylesheet" type="text/css" />
 
-<table class="table">
-    <tr>
-        <th>
-            Users
-        </th>
-    </tr>
+<div class="card" style="padding-left:20px; padding-right:20px">
 
     @foreach (var item in Model)
     {
-        <tr>
-            <td>
-                @Html.ActionLink(item.username, "../AllUsers/NonSessionUserProfile", new { username = item.username })
-            </td>
-            <td>
-                @Html.ActionLink("Accept Request", "AcceptFollowRequest", new { sender = item.username, source="FollowRequests" })
-            </td>
-            <td>
-            @Html.ActionLink("Delete Request", "DeleteFollowRequest", new { sender = item.username, source="FollowRequests" })
-            </td>
+        <div class="card" style="background-color:rgb(46, 46, 46);padding:0px 20px 20px 20px">
+            <br />
+            <label style="color: mediumpurple">Username: </label>
+            @Html.ActionLink(item.username, "../AllUsers/NonSessionUserProfile", new { username = item.username })
+            <br />
+            @Html.ActionLink("Accept Request", "AcceptFollowRequest", new { sender = item.username, source = "FollowRequests" })
+            <label style="color:white"> </label>
+            @Html.ActionLink(" Delete Request", "DeleteFollowRequest", new { sender = item.username, source = "FollowRequests" })
 
-        </tr>
+        </div>
     }
-
-</table>
+</div>
 @Html.ActionLink("Back to Profile Page", "Profile")
 

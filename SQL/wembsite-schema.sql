@@ -45,7 +45,8 @@ create table UserContent
     DateCreation datetime not null,
     FileType varchar(20) not null,
     RawData varchar(8000) not null,
-    likes int
+    likes int,
+    filePath varchar(300)
 
         foreign key (username) references Users(username) on delete set null on update cascade,
 

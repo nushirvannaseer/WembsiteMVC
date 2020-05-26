@@ -8,13 +8,15 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Wembsite.Models;
+using System.IO;
+using System.Windows.Forms;
 
 namespace Wembsite.Controllers
 {
     public class UserHomeController : Controller
     {
         private UserDBContext db = new UserDBContext();
-        public  ActionResult Profile()
+        public ActionResult Profile()
         {
             if (Session["username"] == null)
                 return RedirectToAction("../Login/Index");
@@ -42,7 +44,7 @@ namespace Wembsite.Controllers
 
         public ActionResult SendFollowRequest(string usernameB, string source)
         {
-            CRUD.SendFollowRequest( Session["username"].ToString(), usernameB);
+            CRUD.SendFollowRequest(Session["username"].ToString(), usernameB);
             if (source == "../AllUsers/NonSessionUserProfile")
                 return View(source, CRUD.getUser(usernameB));
             List<User> users = CRUD.AllUsers();
@@ -66,7 +68,7 @@ namespace Wembsite.Controllers
                 List<User> u = CRUD.DisplayFollowRequestsOfAUser(Session["username"].ToString());
                 return View(source, u);
             }
-               
+
             List<User> users = CRUD.AllUsers();
             return View(source, users);
         }
@@ -105,15 +107,30 @@ namespace Wembsite.Controllers
             return View();
         }
 
-        public ActionResult PublishPost(string postContent, string privacy)
+        public ActionResult PublishPost(string postContent, string privacy, HttpPostedFileBase file)
         {
+            if (file != null && file.ContentLength > 0)
+            {
+                string fileName = Session["username"].ToString() + "__" + file.FileName;
+                string path = Path.Combine(Server.MapPath("~/UserUploads"),
+                                           Path.GetFileName(fileName));
+                file.SaveAs(path);
+                path = "../UserUploads/" + fileName;
+                path=path.Replace('\\', '/');
+                //path=path.Prepend("")
+                string[] extension = file.FileName.Split('.');
+                int last = extension.Count();
+                //ViewBag.Message = "File uploaded successfully";
+                CRUD.NewPost(Session["username"].ToString(), postContent, privacy, path, extension[last - 1]);
+                return RedirectToAction("Profile");
+            }
             CRUD.NewPost(Session["username"].ToString(), postContent, privacy);
             return RedirectToAction("Profile");
         }
 
         public ActionResult AllPosts()
         {
-            List<UserContent> postList=CRUD.AllPostsOfAUser(Session["username"].ToString());
+            List<UserContent> postList = CRUD.AllPostsOfAUser(Session["username"].ToString());
             return View(postList);
         }
 
@@ -125,7 +142,7 @@ namespace Wembsite.Controllers
 
         public ActionResult EditPost(int id)
         {
-            UserContent post=CRUD.GetUserPost(id);
+            UserContent post = CRUD.GetUserPost(id);
             return View(post);
         }
 
@@ -144,7 +161,7 @@ namespace Wembsite.Controllers
         public ActionResult HomePage()
         {
             List<UserContent> postList = CRUD.HomepagePost(Session["username"].ToString());
-            
+
             return View(postList);
         }
 
@@ -154,7 +171,7 @@ namespace Wembsite.Controllers
             CRUD.LikePost(contentID, likedBy);
             ViewData["Message"] = "Unlike";
             //if like was already present
-            if (originalLikes== Convert.ToInt32(CRUD.GetUserPost(contentID).likes))
+            if (originalLikes == Convert.ToInt32(CRUD.GetUserPost(contentID).likes))
             {
                 CRUD.UnLikePost(contentID, likedBy);
                 ViewData["Message"] = "Like";
@@ -189,7 +206,7 @@ namespace Wembsite.Controllers
         public ActionResult AddComment(string commentText, string contentID)
         {
             var cID = ""; int i = 0;
-            while(contentID[i]>=48 && contentID[i]<=57)
+            while (contentID[i] >= 48 && contentID[i] <= 57)
             {
                 cID += contentID[i];
                 i++;

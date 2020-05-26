@@ -5,36 +5,23 @@
     ViewBag.Title = "Wembsite";
 }
 
-<h2>@Model.username</h2>
-<link href="../../Content/LoginStyles.css" rel="stylesheet" type="text/css" />
+<h2 class="headings" style="color:rgb(201, 201, 201)">@Model.username</h2>
+<link href="../../Content/material.css" rel="stylesheet" type="text/css" />
 
-<div>
-    <h4>User</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.firstname)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.firstname)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.lastname)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.lastname)
-        </dd>
-
-    </dl>
-</div>
-<div>
+<div class="card" style="padding-top:0px; padding-left:10px">
+    <br />
+    <h4 style="color: rgb(201, 201, 201);">User</h4>
+    <label style="color:mediumpurple">Username: </label>
+    <label style="color:white">@Model.username</label><br />
+    <label style="color:mediumpurple">Name: </label>
+    <label style="color:white">@Model.firstname @Model.lastname</label><br />
+    <label style="color:mediumpurple">Email: </label>
+    <label style="color:white">@Model.email</label><br />
+    <br />
     @{
         if (CRUD.RequestSent(Session["username"].ToString(), Model.username) == true)
         {
-            @Html.ActionLink("Cancel Request", "../UserHome/CancelFollowRequest", new { usernameB = Model.username, source = "../AllUsers/NonSessionUserProfile"});
+            @Html.ActionLink("Cancel Request", "../UserHome/CancelFollowRequest", new { usernameB = Model.username, source = "../AllUsers/NonSessionUserProfile" });
         }
 
         else if (CRUD.IsFollowing(Session["username"].ToString(), Model.username))
@@ -46,6 +33,11 @@
         {
             @Html.ActionLink("Follow User", "../UserHome/SendFollowRequest", new { usernameB = Model.username, source = "../AllUsers/NonSessionUserProfile" })
         }
+    }
+</div>
+<div class="card">
+    @{
+       
         
         <br />
         Html.RenderPartial("_NonSessionUserPosts", CRUD.getNonSessionUserPosts(Model.username, Session["username"].ToString()));

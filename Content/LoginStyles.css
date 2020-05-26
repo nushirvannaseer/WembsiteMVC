@@ -72,6 +72,7 @@ h1 {
     border-color: transparent;
     border-width: 2px;
     border-style: solid;
+    margin-bottom:10px;
 }
 
     .inputField_signup:hover {
@@ -94,7 +95,7 @@ h1 {
 }
 
 .signupForm {
-    background: rgb(255,255,255,0.4);
+    background: rgb(255,255,255, 0.4);
     width: 30%;
     height: 610px;
     display: flex;
@@ -104,7 +105,7 @@ h1 {
     border-radius: 25px;
     border-style: solid;
     border-color: transparent;
-    margin-top: 35px;
+    margin-top: 10px;
 }
 
 a {
@@ -141,7 +142,7 @@ button {
     margin-top: 20px;
     resize: horizontal;
     color: gold;
-    transition: 0.7s;
+    transition: 0.4s;
     border-radius: 40px;
     /* -ms-transform: rotate(20deg); /* IE 9 */
 }
@@ -151,5 +152,5 @@ button {
         color: darkblue;
         box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
         border: 2px solid darkblue;
-        transform: rotate(360deg); /* Standard syntax */
+        transform:scale(1.2, 1.2); /* Standard syntax */
     }

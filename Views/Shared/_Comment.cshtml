@@ -9,11 +9,14 @@
     }
 }
 
-@foreach (var item in Model)
-{
-    x = item.contentID.ToString();
-    <div id="@item.commentID.ToString()">
-        <text style="font-size:medium; color:black">@item.commentedBy: </text>
-        <text style="font-size:smaller">@item.commentText</text>
-    </div>
-}
+<div >
+    @foreach (var item in Model)
+    {
+        x = item.contentID.ToString();
+        <div id="@item.commentID.ToString()">
+            <text style="font-size:medium; color:mediumpurple">@item.commentedBy: </text>
+            <text style="font-size:smaller; color: white">@item.commentText</text>
+        </div>
+    }
+</div>
+

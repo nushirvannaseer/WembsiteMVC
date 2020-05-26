@@ -14,28 +14,20 @@
         <form class="signupForm" name="signupForm" method="post" action="../../Login/addNewUser">
 
             <h2>Sign Up</h2>
-
+            <label style="color:darkred; text-align:center;">@Model</label>
             <label class="label">First Name:</label>
             <input class='inputField_Signup' name="fname" type="text" required />
-            <br />
             <label class="label">Last Name:</label>
             <input class='inputField_Signup' name="lname" type="text" required />
-            <br />
             <label class="label">Username:</label>
             <input class='inputField_Signup' name="uname" type="text" required />
-            <br />
             <label class="label">Email:</label>
             <input class='inputField_Signup' name="email" type="email" required />
-            <br />
-            <label>@Model</label>
             <label class="label">Password:</label>
             <input class='inputField_Signup' type="password" name="upwd" required />
-            <br />
             <label class="label">Confirm Password:</label>
             <input class='inputField_Signup' type="password" name="confirmpassword" required />
-            <br />
             <button type="submit" onclick="passwordValidity()">Sign Up!</button>
-            <br />
             <h4 style="color:darkred">
                 Already a Wembsiter?
             </h4>

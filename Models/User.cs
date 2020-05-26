@@ -40,6 +40,8 @@ namespace Wembsite.Models
         public string FileType { get; set; }
         public string RawData { get; set; }
         public int likes { get; set; }
+        public string filePath { get; set; }
+
 
         public UserContent() { }
 

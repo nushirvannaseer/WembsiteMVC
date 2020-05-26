@@ -1,18 +1,18 @@
-﻿@model Wembsite.Models.User
+﻿@*@model Wembsite.Models.User
 
 @{
     ViewBag.Title = "Edit";
 }
     
-<h2>Edit</h2>
-<link href="../../Content/LoginStyles.css" rel="stylesheet" type="text/css" />
+<h2 style="color:white">Edit</h2>
+<link href="../../Content/material.css" rel="stylesheet" type="text/css" />
 
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>User</h4>
+        <h4 style="color:white">User</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.username)
@@ -59,4 +59,4 @@
 
 <div>
     @Html.ActionLink("Back to List", "Index")
-</div>
+</div>*@

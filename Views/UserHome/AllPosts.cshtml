@@ -1,52 +1,87 @@
 ﻿@model IEnumerable<Wembsite.Models.UserContent>
+@using Wembsite.Models
 
 @{
-    ViewBag.Title = "AllPosts";
+    ViewBag.Title = "All Posts";
 }
 
-<h2>All Posts</h2>
-<link href="../../Content/LoginStyles.css" rel="stylesheet" type="text/css" />
+<h2 style="color: white">All Posts</h2>
+<link href="../../Content/material.css" rel="stylesheet" type="text/css" />
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayNameFor(model => model.privacy)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.DateCreation)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.likes)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.RawData)
-        </th>
-        <th></th>
-    </tr>
 
-    @foreach (var item in Model)
+@foreach (var item in Model)
+{
+<div class="card" style="margin:20px 20px 20px 20px; padding:20px 20px 20px 20px">
+    <h4 style="color:mediumpurple; stroke:black">@item.username</h4>
+    <h6 style="color:whitesmoke">@item.privacy @item.DateCreation</h6>
+    <label style="text-indent:10px; font-size: medium; color: lightgrey">@item.RawData</label><br />
+    @if (item.filePath != "")
     {
-<tr>
-    <td>
-        @Html.DisplayFor(modelItem => item.privacy)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.DateCreation)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.likes)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.RawData)
-    </td>
-    <td>
-        @Html.ActionLink("View", "ViewPost", new { id = item.contentID }) |
-        @Html.ActionLink("Edit", "EditPost", new { id = item.contentID }) |
-        @Html.ActionLink("Delete", "DeletePost", new { id = item.contentID })
-    </td>
-</tr>
+        <img src="@item.filePath" style="padding:20px 20px 20px 20px; max-height:100%; max-width:100%" />
     }
+    <text>Likes: @item.likes</text>
+    <br />
+    <text>Comments:</text><br />
+    <div class="comment" style="padding-top:0px">
+        <br />
+        @{
+            List<Wembsite.Models.Comment> limst = Wembsite.Models.CRUD.GetCommentsOfAPost(item.contentID);
+            foreach (var com in limst)
+            {
+                var text = com.commentText;
+                text = " " + text;
+                <label style="color:mediumpurple">@com.commentedBy: </label>
+                <label style="color:white"> @text</label>
+                <br />
+            }
+        }
+    </div>
 
-</table>
+    @Html.ActionLink("View", "ViewPost", new { id = item.contentID }) |
+    @Html.ActionLink("Edit", "EditPost", new { id = item.contentID }) |
+    @Html.ActionLink("Delete", "DeletePost", new { id = item.contentID })
+</div>
+}
+
+
+@*<table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.privacy)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateCreation)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.likes)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.RawData)
+            </th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.privacy)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateCreation)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.likes)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.RawData)
+                </td>
+                <td>
+
+                </td>
+            </tr>
+        }
+
+    </table>*@
 <br />
 @Html.ActionLink("Back to Profile Page", "Profile")

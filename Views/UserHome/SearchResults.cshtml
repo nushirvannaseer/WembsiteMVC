@@ -3,22 +3,15 @@
 @{
     ViewBag.Title = "Search Results";
 }
+    <link href="../../Content/material.css" rel="stylesheet" type="text/css" />
+<h2 style="color:white">Search Results for "@ViewData["searchText"].ToString()":</h2>
 
-<h2>Search Results for "@ViewData["searchText"].ToString()":</h2>
+<div class="card" style="padding:0px 20px 20px 20px">
+    <br />
+    @foreach (var item in Model)
+    {
+        @Html.ActionLink(item.username, "../AllUsers/NonSessionUserProfile", new { username = item.username })
+        <br />
+    }
 
-<table class="table">
-    <tr>
-        <th>
-            Usernames
-        </th>
-    </tr>
-
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.ActionLink(item.username, "../AllUsers/NonSessionUserProfile", new { username=item.username})
-        </td>
-    </tr>
-}
-
-</table>
+</div>

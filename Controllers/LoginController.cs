@@ -6,7 +6,7 @@ using System.Web.Mvc;
 using Wembsite.Models;
 using System.Data.Entity;
 using System.Net;
-
+using System.Text.RegularExpressions;
 
 namespace Wembsite.Controllers
 {
@@ -46,22 +46,56 @@ namespace Wembsite.Controllers
         //This is for the sign up page
         public ActionResult addNewUser(string fname, string lname, string uname, string email, string upwd, string confirmpassword)
         {
-            if(confirmpassword!=upwd)
+            string model = "";
+            if (confirmpassword!=upwd)
             {
-                string model = "Passwords do not match!";
+                model = "Passwords do not match!";
+                return View("SignUp", (object)model);
+            }
+            //At least 8 characters long 1 digits 1 Upper case 1 Lower case 1 Symbol
+            var abc = "abcdefghijklmnopqrstuvwxyz";
+            var ABC = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+            var symbol = "!@#$%^&*()";
+            var digit = "1234567890";
+            bool hasabc = false, hasABC = false, hasSymbol = false, hasDigit = false;
+            for(int i=0; i < upwd.Length; ++i)
+            {
+                if (abc.Contains(upwd[i]))
+                {
+                    hasabc = true;
+                }
+
+                else if (ABC.Contains(upwd[i])){
+                    hasABC = true;
+                }
+
+                else if (symbol.Contains(upwd[i]))
+                {
+                    hasSymbol = true;
+                }
+
+                else if (digit.Contains(upwd[i]))
+                {
+                    hasDigit = true;
+                }
+            }
+            if (hasabc == false || hasABC == false || hasSymbol == false|| hasDigit == false)
+            {
+                model = "Password must have atleast 1 digit, 1 uppercase letter, 1 lowercase letter, and 1 symbol!";
                 return View("SignUp", (object)model);
             }
 
             int result = CRUD.signUp(uname, fname, lname, email, upwd);
             if (result == 1)
             {
+                Session["username"] = uname;
                 return RedirectToAction("../UserHome/Profile");
             }
 
             else 
             {
-                string model = "UserID not unique";
-                return View("Index", (object)model);
+                model = "UserID not unique";
+                return View("SignUp", (object)model);
             }
             
         }
