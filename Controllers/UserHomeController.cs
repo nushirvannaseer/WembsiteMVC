@@ -124,6 +124,11 @@ namespace Wembsite.Controllers
                 CRUD.NewPost(Session["username"].ToString(), postContent, privacy, path, extension[last - 1]);
                 return RedirectToAction("Profile");
             }
+            if(postContent=="")
+            {
+                ViewData["Message"] = "Only Text post cannot be empty";
+                return View("CreateNewPost");
+            }
             CRUD.NewPost(Session["username"].ToString(), postContent, privacy);
             return RedirectToAction("Profile");
         }
