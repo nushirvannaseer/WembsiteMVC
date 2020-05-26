@@ -11,36 +11,40 @@
 
 @foreach (var item in Model)
 {
-<div class="card" style="margin:20px 20px 20px 20px; padding:20px 20px 20px 20px">
-    <h4 style="color:mediumpurple; stroke:black">@item.username</h4>
-    <h6 style="color:whitesmoke">@item.privacy @item.DateCreation</h6>
-    <label style="text-indent:10px; font-size: medium; color: lightgrey">@item.RawData</label><br />
-    @if (item.filePath != "")
-    {
-        <img src="@item.filePath" style="padding:20px 20px 20px 20px; max-height:100%; max-width:100%" />
-    }
-    <text>Likes: @item.likes</text>
-    <br />
-    <text>Comments:</text><br />
-    <div class="comment" style="padding-top:0px">
+    <div class="card" style="margin:20px 20px 20px 20px; padding:20px 20px 20px 20px">
+        <h4 style="color:mediumpurple; stroke:black">@item.username</h4>
+        <h6 style="color:whitesmoke">@item.privacy @item.DateCreation</h6>
+        <label style="text-indent:10px; font-size: medium; color: lightgrey">@item.RawData</label>
         <br />
-        @{
-            List<Wembsite.Models.Comment> limst = Wembsite.Models.CRUD.GetCommentsOfAPost(item.contentID);
-            foreach (var com in limst)
-            {
-                var text = com.commentText;
-                text = " " + text;
-                <label style="color:mediumpurple">@com.commentedBy: </label>
-                <label style="color:white"> @text</label>
-                <br />
-            }
+        @if (item.filePath != "")
+        {
+            <div class="comment" style="text-align:center">
+                <img src="@item.filePath" style="display:inline-block; width:400px; height:400px; padding:20px 20px 20px 20px; object-fit:scale-down" ; />
+            </div>
         }
-    </div>
+        <br />
+        <text>Likes: @item.likes</text>
+        <br />
+        <text>Comments:</text><br />
+        <div class="comment" style="padding-top:0px">
+            <br />
+            @{
+                List<Wembsite.Models.Comment> limst = Wembsite.Models.CRUD.GetCommentsOfAPost(item.contentID);
+                foreach (var com in limst)
+                {
+                    var text = com.commentText;
+                    text = " " + text;
+                    <label style="color:mediumpurple">@com.commentedBy: </label>
+                    <label style="color:white"> @text</label>
+                    <br />
+                }
+            }
+        </div>
 
-    @Html.ActionLink("View", "ViewPost", new { id = item.contentID }) |
-    @Html.ActionLink("Edit", "EditPost", new { id = item.contentID }) |
-    @Html.ActionLink("Delete", "DeletePost", new { id = item.contentID })
-</div>
+        @Html.ActionLink("View", "ViewPost", new { id = item.contentID }) |
+        @Html.ActionLink("Edit", "EditPost", new { id = item.contentID }) |
+        @Html.ActionLink("Delete", "DeletePost", new { id = item.contentID })
+    </div>
 }
 
 

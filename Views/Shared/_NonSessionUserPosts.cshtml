@@ -7,7 +7,7 @@
 
 @foreach (var item in Model)
 {
-    <div class="card" style="background-color:rgb(46, 46, 46);text-indent:5px; text-align:left; margin:20px 20px 20px 20px; padding:20px 20px 20px 20px">
+    <div class="card" style="background-color:rgb(30, 30, 30);text-indent:5px; text-align:left; margin:20px 20px 20px 20px; padding:20px 20px 20px 20px">
 
         @Html.ActionLink(item.username, "../AllUsers/NonSessionUserProfile", new { username = item.username })<br />
         <text style="font-size: smaller">@item.privacy       @item.DateCreation</text>
@@ -18,7 +18,9 @@
         <br />
         @if (item.filePath != "")
         {
-            <img src="@item.filePath" style="padding:20px 20px 20px 20px; max-height:100%; max-width:100%" />
+            <div class="comment" style="text-align:center">
+                <img src="@item.filePath" style="display:inline-block; width:400px; height:400px; padding:20px 20px 20px 20px; object-fit:scale-down" ; />
+            </div>
         }
         <br />
         <div id="@item.contentID.ToString()">
@@ -39,9 +41,9 @@
         }
         <div id="@id" class="comment" style="background-color:rgb(60, 60, 60)">
             @*@{
-                    User usr = CRUD.getUser(item.username);
-                    Html.RenderPartial("_LikeListPartialView", usr);
-                }*@
+                User usr = CRUD.getUser(item.username);
+                Html.RenderPartial("_LikeListPartialView", usr);
+            }*@
         </div>
 
         <text>Comments:<br /></text>
@@ -62,8 +64,8 @@
         }
         ))
         {
-            <input id="commentText" name="commentText" value="" placeholder="Write a comment..." />
-            <input type="submit" class="btn" value="Post Comment" />
+            <input class="searchBox" id="commentText" name="commentText" value="" placeholder="Write a comment..." />
+            <input class="button" type="submit" value="Post Comment" />
         }
 
     </div>

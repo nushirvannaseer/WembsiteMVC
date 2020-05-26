@@ -20,9 +20,12 @@
     <label style="color:white;font-family: Arial; text-indent:10px; font-size: large">
         @item.RawData
     </label>
+    <br />
     @if (item.filePath != "")
     {
-        <img src="@item.filePath" style="padding:20px 20px 20px 20px; max-height:100%; max-width:100%" />
+        <div class="comment" style="text-align:center">
+            <img src="@item.filePath" style="display:inline-block; width:400px; height:400px; padding:20px 20px 20px 20px; object-fit:scale-down" ; />
+        </div>
     }
     <br />
 

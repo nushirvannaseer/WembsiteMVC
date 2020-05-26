@@ -15,13 +15,26 @@
         <label style="color:mediumpurple">File Type: </label>
         <label style="color:white">@Model.FileType</label><br />
         <label style="color:mediumpurple">Post Text: </label>
-        @{ 
+        @{
             var text = Model.RawData;
-            if (Model.RawData == null || Model.RawData=="") {
-                text="Simple Text";
+            if (Model.RawData == null || Model.RawData == "")
+            {
+                text = "Simple Text";
             }
         }
         <label style="color:white">@text</label><br />
+        @*<br />
+        @if (Model.filePath != "")
+        {
+            <div class="comment">
+                @{ 
+                    string[] path = Model.filePath.Split('/');
+                    path[1] = path[1].ToString().Prepend('.');
+                }
+                <img src="@Model.filePath" style="width:400px; height:400px; padding:20px 20px 20px 20px; object-fit:scale-down" ; />
+            </div>
+        }
+        <br />*@
     </div>
 </div>
 <p>
