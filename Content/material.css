@@ -11,6 +11,7 @@ div.card {
     margin-top: 10px;
     min-height:0%;
     min-width:0%;
+    border-radius:10px;
 }
 
 dl.dl-horizontal {
@@ -30,6 +31,7 @@ div.comment {
     padding: 10px 5px 10px 5px;
     margin-bottom: 10px;
     margin-top: 10px;
+    border-radius:10px;
 }
 
 button {
@@ -82,6 +84,7 @@ div.createNewPost {
     padding: 30px 20px 30px 30px;
     margin-bottom: 10px;
     margin-top: 10px;
+    border-radius:10px;
 }
 
 input.searchBox {
