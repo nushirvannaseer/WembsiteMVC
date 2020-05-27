@@ -103,8 +103,9 @@ input.searchBox {
      width:400px;
      border-radius:5px;
 }
+
 input.searchBox:hover{
-    box-shadow:5px 5px 50px ;
+    box-shadow:1px 1px 20px ;
 }
 
 div.flex-container{
