@@ -47,7 +47,7 @@ div.comment {
 }
 
 button {
-    background-color: mediumpurple;
+    background-color: #4c566a/*mediumpurple*/;
     border: 1px solid white;
     border-radius:5px;
     height: 30px;
@@ -60,16 +60,16 @@ button {
 }
 
     button:hover {
-        background-color: rgb(46, 46, 46); /* Green */
-        color: mediumpurple;
+        background-color: white/*rgb(46, 46, 46)*/; /* Green */
+        color: #4c566a;
         box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
-        border: 2px solid mediumpurple;
+        border: 2px solid #4c566a;
         transform: scale(1.2,1.2) /* Standard syntax */
     }
 
 input.button {
    
-    background-color: mediumpurple;
+    background-color: #4c566a;
     border: 1px solid white;
     border-radius: 5px;
     height: 30px;
@@ -82,10 +82,10 @@ input.button {
 }
 
 input.button:hover {
-    background-color: rgb(46, 46, 46); /* Green */
-    color: mediumpurple;
+    background-color: white/*rgb(46, 46, 46)*/; /* Green */
+    color: #4c566a;
     box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
-    border: 2px solid mediumpurple;
+    border: 2px solid #4c566a;
     transform:scale(1.2,1.2); /* Standard syntax */
 }
 
@@ -210,7 +210,7 @@ text {
     stroke: white;
     stroke-width: 5px;
     stroke-opacity: 100;
-    -webkit-text-stroke-color: blacqqk;
+    -webkit-text-stroke-color: black;
     font-size: large;
     font-family: 'Trebuchet MS';
 }
