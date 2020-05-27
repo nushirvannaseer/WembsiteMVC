@@ -7,14 +7,13 @@
 <div>
 
 
-    <link href="../../Content/LoginStyles.css" rel="stylesheet" type="text/css" />
-    <link href="LoginStyles.css" rel="stylesheet" type="text/css" />
+    <link href="../../Content/material.css" rel="stylesheet" type="text/css" />
     <div>
         
         <form class="signupForm" name="signupForm" method="post" action="../../Login/addNewUser">
 
             <h2>Sign Up</h2>
-            <label style="color:darkred; text-align:center;">@Model</label>
+            <label style="color:yellow; text-align:center;">@Model</label>
             <label class="label">First Name:</label>
             <input class='inputField_Signup' name="fname" type="text" required />
             <label class="label">Last Name:</label>
@@ -28,10 +27,10 @@
             <label class="label">Confirm Password:</label>
             <input class='inputField_Signup' type="password" name="confirmpassword" required />
             <button type="submit" onclick="passwordValidity()">Sign Up!</button>
-            <h4 style="color:darkred">
+            <h4 style="color:yellow">
                 Already a Wembsiter?
             </h4>
-            <a href="Index" style="margin-bottom: 15px;">Login here!</a>
+            <a style="color:mediumpurple" href="Index" style="margin-bottom: 15px;">Login here!</a>
         </form>
     </div>
 </div>

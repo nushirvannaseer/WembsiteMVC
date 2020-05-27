@@ -6,6 +6,7 @@
 }
 <h2 style="color:white">Following</h2>
 <link href="../../Content/material.css" rel="stylesheet" type="text/css" />
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 <div class="card" style="padding:0px 20px 20px 20px">
     <br />
@@ -16,6 +17,7 @@
     }
 
 </div>
-@Html.ActionLink("Back to Profile Page", "Profile")
+<button onclick="location.href='@Url.Action("Profile") ';return false;" class="tile" style="display:inline-flex;width:140px; height:40px"><i class="material-icons">person</i>Back to Profile</button>
+
 
 

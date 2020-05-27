@@ -3,7 +3,8 @@
 @{
     ViewBag.Title = "Search Results";
 }
-    <link href="../../Content/material.css" rel="stylesheet" type="text/css" />
+<link href="../../Content/material.css" rel="stylesheet" type="text/css" />
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <h2 style="color:white">Search Results for "@ViewData["searchText"].ToString()":</h2>
 
 <div class="card" style="padding:0px 20px 20px 20px">
@@ -15,3 +16,5 @@
     }
 
 </div>
+<button onclick="location.href='@Url.Action("../UserHome/Profile") ';return false;" class="tile" style="display:inline-flex;width:140px; height:40px"><i class="material-icons">person</i>Back to Profile</button>
+

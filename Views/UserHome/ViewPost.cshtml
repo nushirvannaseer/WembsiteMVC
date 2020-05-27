@@ -2,6 +2,7 @@
 
 <h2 style="color:white">View Post</h2>
 <link href="../../Content/material.css" rel="stylesheet" type="text/css" />
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 <div>
     <div class="card" style="padding-top:0px">
@@ -24,17 +25,17 @@
         }
         <label style="color:white">@text</label><br />
         @*<br />
-        @if (Model.filePath != "")
-        {
-            <div class="comment">
-                @{ 
-                    string[] path = Model.filePath.Split('/');
-                    path[1] = path[1].ToString().Prepend('.');
-                }
-                <img src="@Model.filePath" style="width:400px; height:400px; padding:20px 20px 20px 20px; object-fit:scale-down" ; />
-            </div>
-        }
-        <br />*@
+            @if (Model.filePath != "")
+            {
+                <div class="comment">
+                    @{
+                        string[] path = Model.filePath.Split('/');
+                        path[1] = path[1].ToString().Prepend('.');
+                    }
+                    <img src="@Model.filePath" style="width:400px; height:400px; padding:20px 20px 20px 20px; object-fit:scale-down" ; />
+                </div>
+            }
+            <br />*@
     </div>
 </div>
 <p>
@@ -42,4 +43,4 @@
     @Html.ActionLink("Back to List", "AllPosts")
 </p>
 
-@Html.ActionLink("Back to Profile Page", "Profile")
+<button onclick="location.href='@Url.Action("Profile") ';return false;" class="tile" style="display:inline-flex;width:140px; height:40px"><i class="material-icons">person</i>Back to Profile</button>

@@ -10,28 +10,24 @@
         var alert = @ViewData["Message"];
     }
 }
-
-
-
 <!DOCTYPE html>
 <html>
 
 
-<link href="../../Content/LoginStyles.css" rel="stylesheet" type="text/css" />
+<link href="../../Content/material.css" rel="stylesheet" type="text/css" />
 <div>
     <form class="loginForm" name="loginForm" method="post" action="../../Login/VerifyCredentials" onsubmit="validateInput()">
-        <h1>Wembsite</h1>
+        <h1 style="color:yellow">Wembsite</h1>
         <h2>Log in</h2>
-        <br />
-        <label style="color:darkred">@ViewData["Message"]</label><br />
-        <label class="label" name="unLabel">Username:</label>
+        <label style="color:yellow">@ViewData["Message"]</label><br />
+        <label class="label" style="font-size:medium" name="unLabel">Username:</label>
         <input class="inputField" type="text" name="un" placeholder="Username" required />
-        <label class="label" name="pLabel">  Password:</label>
+        <label class="label" style="font-size:medium" name="pLabel">  Password:</label>
         <input class="inputField" type="password" name="upwd" placeholder="Password" required />
         <a style="font-size:small" href="../../Login/ForgotPassword">Forgot my password</a>
         <button name="loginBtn" type="submit">Log In</button>
         <br /><br /><text>New to Wembsite?</text>
-        <a href="../../Login/SignUp">Click here to create an account!</a>
+        <a style="color:mediumpurple" href="../../Login/SignUp">Click here to create an account!</a>
     </form>
 </div>
 </html>

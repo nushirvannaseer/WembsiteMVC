@@ -6,7 +6,7 @@
 
 <h2 style="color:white">EditPost</h2>
 
-
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <link href="../../Content/material.css" rel="stylesheet" type="text/css" />
 <form method="post" action="../../UserHome/SaveEditChanges">
     <div class="form-horizontal">
@@ -42,5 +42,6 @@
 </form>
     
 <div>
-    @Html.ActionLink("Back to List", "AllPosts")
+    <button onclick="location.href='@Url.Action("AllUsers") ';return false;" class="tile" style="display:inline-flex;width:140px; height:40px"><i class="material-icons">people</i>Back to List</button>
+
 </div>

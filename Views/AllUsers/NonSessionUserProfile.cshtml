@@ -7,6 +7,7 @@
 
 <h2 class="headings" style="color:rgb(201, 201, 201)">@Model.username</h2>
 <link href="../../Content/material.css" rel="stylesheet" type="text/css" />
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
 <div class="card" style="padding-top:0px; padding-left:10px">
     <br />
@@ -37,9 +38,11 @@
 </div>
 <div>
     @{
-       
-        
+
+
         <br />
         Html.RenderPartial("_NonSessionUserPosts", CRUD.getNonSessionUserPosts(Model.username, Session["username"].ToString()));
     }
 </div>
+<button onclick="location.href='@Url.Action("../UserHome/Profile") ';return false;" class="tile" style="display:inline-flex;width:140px; height:40px"><i class="material-icons">person</i>Back to Profile</button>
+

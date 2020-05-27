@@ -7,36 +7,38 @@
 
 <h2 style="color:white">All Wembsiters</h2>
 <link href="../../Content/material.css" rel="stylesheet" type="text/css" />
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-<div class="card" style="padding:20px 20px 20px 20px">     
+<div class="card" style="padding:20px 20px 20px 20px">
     @foreach (var item in Model)
     {
-    <div class="card" style="background-color:rgb(46, 46, 46);padding:0px 20px 20px 20px">
-        <br />
-        <label style="color: mediumpurple">Username: </label>
-        @Html.ActionLink(item.username, "NonSessionUserProfile", new { username = item.username })
-        <br />
-        <label style="color:mediumpurple">Name: </label>
-        <label style="color:white">@item.firstname @item.lastname </label><br />
-        <label style="color:mediumpurple">Email: </label>
-        <label style="color:mediumpurple">@item.email </label><br />
-        @if (Session["username"] != null && CRUD.RequestSent(Session["username"].ToString(), item.username) == true)
-        {
-            @Html.ActionLink("Cancel Request", "../UserHome/CancelFollowRequest", new { usernameB = item.username, source = "../AllUSers/Index" });
-        }
+        <div class="card" style="background-color:rgb(46, 46, 46);padding:0px 20px 20px 20px">
+            <br />
+            <label style="color: mediumpurple">Username: </label>
+            @Html.ActionLink(item.username, "NonSessionUserProfile", new { username = item.username })
+            <br />
+            <label style="color:mediumpurple">Name: </label>
+            <label style="color:white">@item.firstname @item.lastname </label><br />
+            <label style="color:mediumpurple">Email: </label>
+            <label style="color:mediumpurple">@item.email </label><br />
+            @if (Session["username"] != null && CRUD.RequestSent(Session["username"].ToString(), item.username) == true)
+            {
+                @Html.ActionLink("Cancel Request", "../UserHome/CancelFollowRequest", new { usernameB = item.username, source = "../AllUSers/Index" });
+            }
 
-        else if (Session["username"] != null && CRUD.IsFollowing(Session["username"].ToString(), item.username))
-        {
-            @Html.ActionLink("Unfollow User", "../UserHome/DeleteFollower", new { followee = item.username, source = "../AllUSers/Index" });
-        }
+            else if (Session["username"] != null && CRUD.IsFollowing(Session["username"].ToString(), item.username))
+            {
+                @Html.ActionLink("Unfollow User", "../UserHome/DeleteFollower", new { followee = item.username, source = "../AllUSers/Index" });
+            }
 
-        else if (Session["username"] != null && item.username != Session["username"].ToString())
-        {
-            @Html.ActionLink("Follow User", "../UserHome/SendFollowRequest", new { usernameB = item.username, source = "../AllUSers/Index" })
-        }
-    </div>
+            else if (Session["username"] != null && item.username != Session["username"].ToString())
+            {
+                @Html.ActionLink("Follow User", "../UserHome/SendFollowRequest", new { usernameB = item.username, source = "../AllUSers/Index" })
+            }
+        </div>
     }
 
 </div>
 
-@Html.ActionLink("Back to Profile Page", "../UserHome/Profile")
+<button onclick="location.href='@Url.Action("../UserHome/Profile") ';return false;" class="tile" style="display:inline-flex;width:140px; height:40px"><i class="material-icons">person</i>Back to Profile</button>
+
