@@ -129,6 +129,7 @@ namespace Wembsite.Controllers
                 ViewData["Message"] = "Only Text post cannot be empty";
                 return View("CreateNewPost");
             }
+
             CRUD.NewPost(Session["username"].ToString(), postContent, privacy);
             return RedirectToAction("Profile");
         }
