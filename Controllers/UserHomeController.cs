@@ -24,21 +24,21 @@ namespace Wembsite.Controllers
             return View(user);
         }
 
-        public ActionResult Followers(string username)
+        public ActionResult Followers()
         {
-            List<User> users = CRUD.DisplayFollowersOfAUser(username);
+            List<User> users = CRUD.DisplayFollowersOfAUser(Session["username"].ToString());
             return View("Followers", users);
         }
 
-        public ActionResult Following(string username)
+        public ActionResult Following()
         {
-            List<User> users = CRUD.DisplayFollowingsOfAUser(username);
+            List<User> users = CRUD.DisplayFollowingsOfAUser(Session["username"].ToString());
             return View("Following", users);
         }
 
-        public ActionResult FollowRequests(string username)
+        public ActionResult FollowRequests()
         {
-            List<User> users = CRUD.DisplayFollowRequestsOfAUser(username);
+            List<User> users = CRUD.DisplayFollowRequestsOfAUser(Session["username"].ToString());
             return View("FollowRequests", users);
         }
 
