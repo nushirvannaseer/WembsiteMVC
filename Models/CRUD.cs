@@ -708,6 +708,29 @@ namespace Wembsite.Models
             connect.Close();
 
             return GetCommentsOfAPost(contentID);
-    }
+        }
+
+        public static bool NewRequests(string username)
+        {
+            if (connect.State == ConnectionState.Open)
+            {
+                connect.Close();
+            }
+            connect.Open();
+            SqlCommand cmd = new SqlCommand("", connect);
+            cmd.CommandText = "select * from followRequests where receiver=@username";
+            cmd.Parameters.AddWithValue("@username", username);
+            //cmd.CommandType = System.Data.CommandType.Text;
+            SqlDataReader reader = cmd.ExecuteReader();
+            if (reader.Read())
+            {
+                reader.Close();
+                connect.Close();
+                return true;
+            }
+            reader.Close();
+            connect.Close();
+            return false;
+        }
     }
 }
