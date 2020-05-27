@@ -39,8 +39,7 @@
     </div>
 </div>
 <p>
-    @Html.ActionLink("Edit", "EditPost", new { id = Model.contentID }) |
-    @Html.ActionLink("Back to List", "AllPosts")
+    @Html.ActionLink("Edit", "EditPost", new { id = Model.contentID })
 </p>
 
 <button onclick="location.href='@Url.Action("AllPosts") ';return false;" class="tile" style="display:inline-block;width:140px; height:50px"><i class="material-icons" style="display:block">person</i>Back to List</button>
