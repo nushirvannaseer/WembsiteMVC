@@ -1,5 +1,17 @@
 ﻿body {
     background-color: rgb(23, 23, 24);
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+h1{
+    color:white;
+}
+
+h2{
+    color:white;
 }
 
 div.card {
@@ -93,4 +105,115 @@ input.searchBox {
 }
 input.searchBox:hover{
     box-shadow:5px 5px 50px ;
+}
+
+div.flex-container{
+    display:inline-flex;
+    flex-direction:row;
+    flex-wrap:wrap;
+    justify-content:center;
+}
+
+button.tile{
+    height: 800px;
+    width:300px;
+}
+
+::placeholder{
+    color:white;
+}
+
+.inputField {
+    width: 60%;
+    height: 35px;
+    border-radius: 10px;
+    padding-left: 7px;
+    padding-right: 7px;
+    margin-bottom: 30px;
+    transition: 0.4s;
+    border-color: transparent;
+    border-width: 2px;
+    border-style: solid;
+    box-shadow: 2px 2px 10px rgb(17, 17, 17);
+}
+
+    .inputField:hover {
+        width: 65%;
+        border-color: midnightblue;
+        box-shadow: 3px 3px 20px rgb(17, 17, 17);
+    }
+
+.inputField_Signup {
+    width: 60%;
+    height: 35px;
+    border-radius: 10px;
+    padding-left: 7px;
+    padding-right: 7px;
+    transition: 0.4s;
+    border-color: transparent;
+    border-width: 2px;
+    border-style: solid;
+    margin-bottom: 10px;
+    box-shadow: 2px 2px 10px rgb(17, 17, 17);
+}
+
+    .inputField_signup:hover {
+        width: 65%;
+        border-color: midnightblue;
+        box-shadow: 3px 3px 20px rgb(17, 17, 17);
+    }
+
+.loginForm {
+    background: rgb(255,255,255,0.1);
+    width: 30%;
+    height: 600px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 15px;
+    border-style: solid;
+    border-color: transparent;
+    margin-top: 30px;
+    box-shadow: 2px 2px 10px rgb(17, 17, 17);
+    padding-top:0px;
+}
+
+.signupForm {
+    background: rgb(255,255,255, 0.1);
+    width: 30%;
+    height: 610px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    border-radius: 15px;
+    border-style: solid;
+    border-color: transparent;
+    margin-top: 10px;
+    box-shadow: 2px 2px 10px rgb(17, 17, 17);
+}
+
+/*a {
+    color: mediumpurple;
+    stroke: white;
+    stroke-width: 5px;
+    stroke-opacity: 100;
+    -webkit-text-stroke-color: black;
+    font-size: large;
+    font-family: 'Trebuchet MS';
+}*/
+
+text {
+    color: white;
+    stroke: white;
+    stroke-width: 5px;
+    stroke-opacity: 100;
+    -webkit-text-stroke-color: blacqqk;
+    font-size: large;
+    font-family: 'Trebuchet MS';
+}
+
+input {
+    border-radius: 5px;
 }
