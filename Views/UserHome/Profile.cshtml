@@ -52,21 +52,21 @@
             padding-top:0px; padding-left:15px; max-width:60%;animation-delay:@time">
                 <br />
                 <div class="flex-container" style="padding:0px 40px 10px 30px; animation-fill-mode:both">
-                    <button onclick="location.href='@Url.Action("Homepage") ';return false;" class="tile" style="animation: mymove 5s infinite;margin-left:10px; margin-right:10px; display:inline-block; width:100px; height:80px"><i class="material-icons" style="display:block">home</i>Home</button>
-                    <button onclick="location.href='@Url.Action("CreateNewPost") ';return false;" class="tile" style="margin-left:10px; margin-right:10px;display:inline-block;width:100px; height:80px"><i class="material-icons" style="display:block">add</i>Create</button>
-                    <button onclick="location.href='@Url.Action("AllPosts") ';return false;" class="tile" style="margin-left:10px; margin-right:10px;display:inline-block;width:100px; height:80px"><i class="material-icons" style="display:block">dashboard</i>My Posts</button>
-                    <button onclick="location.href='@Url.Action("../AllUsers/Index") ';return false;" class="tile" style="margin-left:10px; margin-right:10px;display:inline-block;width:100px; height:80px"><i class="material-icons" style="display:block">people</i>People</button>
+                    <button onclick="location.href='@Url.Action("Homepage") ';return false;" class="tile" style="animation: mymoveTILESL 2s normal ;margin-left:10px; margin-right:10px; display:inline-block; width:100px; height:80px"><i class="material-icons" style="display:block">home</i>Home</button>
+                    <button onclick="location.href='@Url.Action("CreateNewPost") ';return false;" class="tile" style="animation: mymoveTILESL 2.1s normal ;margin-left:10px; margin-right:10px;display:inline-block;width:100px; height:80px"><i class="material-icons" style="display:block">add</i>Create</button>
+                    <button onclick="location.href='@Url.Action("AllPosts") ';return false;" class="tile" style="animation: mymoveTILESR 2.2s normal ;margin-left:10px; margin-right:10px;display:inline-block;width:100px; height:80px"><i class="material-icons" style="display:block">dashboard</i>My Posts</button>
+                    <button onclick="location.href='@Url.Action("../AllUsers/Index") ';return false;" class="tile" style="animation: mymoveTILESR 2.3s normal ;margin-left:10px; margin-right:10px;display:inline-block;width:100px; height:80px"><i class="material-icons" style="display:block">people</i>People</button>
                     @if (Wembsite.Models.CRUD.NewRequests(Session["username"].ToString()) == true)
                     {
-                        <button class="greenBtn" onclick="location.href='@Url.Action("FollowRequests") ';return false;" style=" margin-left:10px; margin-right:10px;display:inline-block;width:100px; height:80px"><i class="material-icons" style="display:block">person_add</i>Requests</button>
+                        <button class="greenBtn" onclick="location.href='@Url.Action("FollowRequests") ';return false;" style="animation:mymoveTILESL 2.4s normal; margin-left:10px; margin-right:10px;display:inline-block;width:100px; height:80px"><i class="material-icons" style="display:block">person_add</i>Requests</button>
                     }
                     else
                     {
-                        <button onclick="location.href='@Url.Action("FollowRequests") ';return false;" style="margin-left:10px; margin-right:10px;display:inline-block;width:100px; height:80px"><i class="material-icons" style="display:block">person_add</i>Requests</button>
+                        <button onclick="location.href='@Url.Action("FollowRequests") ';return false;" style="animation:mymoveTILESL 2.4s normal; margin-left:10px; margin-right:10px;display:inline-block;width:100px; height:80px"><i class="material-icons" style="display:block">person_add</i>Requests</button>
                     }
-                    <button onclick="location.href='@Url.Action("Following") ';return false;" class="tile" style="margin-left:10px; margin-right:10px;display:inline-block;width:100px; height:80px"><i class="material-icons" style="display:block">check_box</i>Following</button>
-                    <button onclick="location.href='@Url.Action("Followers") ';return false;" class="tile" style="margin-left:10px; margin-right:10px;display:inline-block;width:100px; height:80px"><i class="material-icons" style="display:block">contactless</i>Followers</button>
-                    <button onclick="location.href='@Url.Action("LogoutUser") ';return false;" class="tile" style="margin-left:10px; margin-right:10px;display:inline-block;width:100px; height:80px"><i class="material-icons" style="display:block">exit_to_app</i>Log Out</button>
+                    <button onclick="location.href='@Url.Action("Following") ';return false;" class="tile" style="animation:mymoveTILESL 2.5s normal;margin-left: 10px;margin-right: 10px;display: inline-block;width: 100px;height: 80px"><i class="material-icons" style="display:block">check_box</i>Following</button>
+                    <button onclick="location.href='@Url.Action("Followers") ';return false;" class="tile" style="animation:mymoveTILESR 2.6s normal; margin-left: 10px; margin-right: 10px; display: inline-block; width: 100px; height: 80px"><i class="material-icons" style="display:block">contactless</i>Followers</button>
+                    <button onclick="location.href='@Url.Action("LogoutUser") ';return false;" class="tile" style="animation:mymoveTILESR 2.7s normal; margin-left:10px; margin-right:10px;display:inline-block;width:100px; height:80px"><i class="material-icons" style="display:block">exit_to_app</i>Log Out</button>
                 </div>
             </div>
         </p>
@@ -108,7 +108,7 @@
 
     @@keyframes mymove2 {
         from {
-            right: 1000px;
+            right: 2000px;
         }
 
         to {
@@ -131,6 +131,25 @@
 
         100% {
             top: 0px;
+        }
+    }
+
+    @@keyframes mymoveTILESL {
+        from {
+            left: 5000px;
+        }
+
+        100% {
+            left: 0px;
+        }
+    }
+    @@keyframes mymoveTILESR {
+        from {
+            right: 5000px;
+        }
+
+        100% {
+            right: 0px;
         }
     }
 </style>
