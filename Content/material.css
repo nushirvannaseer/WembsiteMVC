@@ -93,6 +93,8 @@ button {
     resize: horizontal;
     color: white;
     transition: 0.4s;
+    position: relative;
+    animation: mymoveFromBottom 0.6s normal
 }
 
     button:hover {
@@ -102,6 +104,8 @@ button {
         border: 2px solid #4c566a;
         transform: scale(1.2,1.2) /* Standard syntax */
     }
+
+
 
 #myCard button.greenBtn {
     background-color: green;
@@ -318,5 +322,15 @@ input {
 
     to {
         top: 0px;
+    }
+}
+
+@keyframes mymoveFromBottom {
+    from {
+        bottom: -1000px;
+    }
+
+    to {
+        bottom: 0px;
     }
 }
