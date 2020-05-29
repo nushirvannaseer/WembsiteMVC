@@ -15,11 +15,11 @@
     }
     @foreach (var item in Model)
     {
-        x += 0.3;
+        x += 0.1;
         time = x.ToString() + "s";
         <div class="card" style="position: relative;
-            animation: mymoveFromRight 1s normal;animation-fill-mode:both; background-color:rgb(46, 46, 46);padding:0px 20px 20px 20px;
-            animation-delay:@time ;">
+            animation: mymoveFromRight 1s normal;animation-fill-mode:inherit; background-color:rgb(46, 46, 46);padding:0px 20px 20px 20px;
+            animation-delay:@time">
             <br />
             <label style="color: mediumpurple">Username: </label>
             @Html.ActionLink(item.username, "NonSessionUserProfile", new { username = item.username })
