@@ -47,7 +47,7 @@ div.card {
     min-width: 0%;
     border-radius: 10px;
     position: relative;
-    animation: mymoveFromLeft 0.6s normal
+    animation: mymoveFromLeft 0.5s normal
 }
 
 div.card_with_buttons {
