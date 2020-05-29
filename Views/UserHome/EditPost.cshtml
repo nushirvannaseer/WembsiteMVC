@@ -4,43 +4,46 @@
     ViewBag.Title = "Edit Post";
 }
 
-<h2 style="color:white">Edit Post</h2>
+    <body class="prof">
+        <h2 style="color:white">Edit Post</h2>
 
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-<link href="../../Content/material.css" rel="stylesheet" type="text/css" />
-<form method="post" action="../../UserHome/SaveEditChanges">
-    <div class="form-horizontal">
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-        @Html.HiddenFor(model => model.contentID)
-        <input type="hidden" name="id" value=@Model.contentID />
-        <div class="form-group">
-            <label class="col-md-2" style="text-indent:110px;color:white">Privacy:</label>
-            <div class="col-md-10">
-                <input type="radio" name="privacy" id="Public" value="Public" required />
-                <label style="color:white" for="Public">Public</label><br />
-                <input type="radio" name="privacy" id="Only My Followers" value="Only My Followers" required />
-                <label style="color:white" for="Only My Followers">Only My Followers</label><br />
-                <input type="radio" name="privacy" id="Only Me" value="Only Me" required />
-                <label style="color:white" for="Only Me">Only Me</label><br />
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+        <link href="../../Content/material.css" rel="stylesheet" type="text/css" />
+        <form method="post" action="../../UserHome/SaveEditChanges">
+            <div class="form-horizontal">
+                <hr />
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                @Html.HiddenFor(model => model.contentID)
+                <input type="hidden" name="id" value=@Model.contentID />
+                <div class="form-group">
+                    <label class="col-md-2" style="text-indent:110px;color:white">Privacy:</label>
+                    <div class="col-md-10">
+                        <input type="radio" name="privacy" id="Public" value="Public" required />
+                        <label style="color:white" for="Public">Public</label><br />
+                        <input type="radio" name="privacy" id="Only My Followers" value="Only My Followers" required />
+                        <label style="color:white" for="Only My Followers">Only My Followers</label><br />
+                        <input type="radio" name="privacy" id="Only Me" value="Only Me" required />
+                        <label style="color:white" for="Only Me">Only Me</label><br />
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-2" style="text-indent:96px;color:white">Post Text:</label>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.RawData, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.RawData, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <button type="submit" style="margin-left:197px">
+                    Save
+                </button>
             </div>
+        </form>
+
+        <div>
+            <button onclick="location.href='@Url.Action("AllPosts") ';return false;" class="tile" style="display:inline-block;width:140px; height:50px"><i class="material-icons" style="display:block">people</i>Back to List</button>
+
         </div>
+    </body>
 
-        <div class="form-group">
-            <label class="col-md-2" style="text-indent:96px;color:white">Post Text:</label>
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.RawData, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.RawData, "", new { @class = "text-danger" })
-            </div>
-        </div>
-
-        <button type="submit" style="margin-left:197px">
-            Save
-        </button>
-    </div>
-</form>
-    
-<div>
-    <button onclick="location.href='@Url.Action("AllPosts") ';return false;" class="tile" style="display:inline-block;width:140px; height:50px"><i class="material-icons"style="display:block">people</i>Back to List</button>
-
-</div>
