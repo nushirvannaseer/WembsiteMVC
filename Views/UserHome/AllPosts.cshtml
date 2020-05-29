@@ -14,7 +14,7 @@
     <div class="card" style="margin:20px 20px 20px 20px; padding:20px 20px 20px 20px">
         <h4 style="color:mediumpurple; stroke:black">@item.username</h4>
         <h6 style="color:whitesmoke">@item.privacy @item.DateCreation</h6>
-        <label style="text-indent:10px; font-size: medium; color: lightgrey">@item.RawData</label>
+        <label style="text-indent:10px; font-size: medium; color: white">@item.RawData</label>
         <br />
         @if (item.filePath != "")
         {
@@ -47,45 +47,5 @@
     </div>
 }
 
-
-@*<table class="table">
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.privacy)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DateCreation)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.likes)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.RawData)
-            </th>
-            <th></th>
-        </tr>
-
-        @foreach (var item in Model)
-        {
-            <tr>
-                <td>
-                    @Html.DisplayFor(modelItem => item.privacy)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.DateCreation)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.likes)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.RawData)
-                </td>
-                <td>
-
-                </td>
-            </tr>
-        }
-
-    </table>*@
 <br />
 <button onclick="location.href='@Url.Action("Profile") ';return false;" class="tile" style="display:inline-block;width:140px; height:50px"><i class="material-icons" style="display:block">person</i>Back to Profile</button>

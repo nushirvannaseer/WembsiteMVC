@@ -7,18 +7,27 @@
 
 
 
-<h2 style="color:white">Home Page</h2>
+<h2 style="position: relative;
+            animation: mymoveh2 0.6s normal;color:white">Home Page</h2>
 <link href="../../Content/material.css" rel="stylesheet" type="text/css" />
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
-
+@{ 
+    var time = "";
+    var x = 0.0;
+}
 @foreach (var item in Model)
 {
-    <div class="card" style=" margin:20px 20px 20px 20px; padding:20px 20px 20px 20px">
+        time = x.ToString() + "s";
+        x += 0.1;
+    <div class="card_with_buttons" style="animation-fill-mode:both; position: relative; 
+    animation: mymove 0.6s normal; margin: 20px 20px 20px 20px; padding: 20px 20px 20px 20px;
+    animation-delay:@time;
+        ">
         @Html.ActionLink(item.username, "../AllUsers/NonSessionUserProfile", new { username = item.username })
         <br />
         <label style="color:white;font-size:smaller">@item.privacy       @item.DateCreation</label>
         <br />
-        <label style="color:white;font-family: Arial; text-indent:10px; font-size: large">
+        <label style="color: white; font-family: Arial; text-indent: 10px; font-size: large">
             @item.RawData
         </label>
         <br />
@@ -46,9 +55,7 @@
         @{
             var id = @item.contentID.ToString() + "likeList";
         }
-        <div id="@id" class="comment">
-
-        </div>
+        <div id="@id" class="comment" style="min-width:0%; min-height:0%"></div>
         @*<hr />*@
         <text>Comments:<br /></text>
         @{
@@ -77,6 +84,25 @@
 
 <button onclick="location.href='@Url.Action("Profile") ';return false;" class="tile" style="display:inline-block;width:140px; height:50px"><i class="material-icons"style="display:block">person</i>Back to Profile</button>
 
+<style>
+    @@keyframes mymove{
+        from{
+            left:2500px;
+        }
+        to{
+            left:0px;
+        }
+    }
+    @@keyframes mymoveh2 {
+        from {
+            right:  2500px;
+        }
+
+        to {
+            right: 0px;
+        }
+    }
+</style>
 
 
 

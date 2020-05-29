@@ -17,7 +17,7 @@
     <label style="color:mediumpurple">Name: </label>
     <label style="color:white">@Model.firstname @Model.lastname</label><br />
     <label style="color:mediumpurple">Email: </label>
-    <label style="color:white">@Model.email</label><br />
+    <label style="color:navajowhite">@Model.email</label><br />
     <br />
     @{
         if (CRUD.RequestSent(Session["username"].ToString(), Model.username) == true)

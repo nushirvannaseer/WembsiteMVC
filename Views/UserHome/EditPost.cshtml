@@ -4,13 +4,12 @@
     ViewBag.Title = "Edit Post";
 }
 
-<h2 style="color:white">EditPost</h2>
+<h2 style="color:white">Edit Post</h2>
 
 <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 <link href="../../Content/material.css" rel="stylesheet" type="text/css" />
 <form method="post" action="../../UserHome/SaveEditChanges">
     <div class="form-horizontal">
-        <h4 style="color:white">UserContent</h4>
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.contentID)

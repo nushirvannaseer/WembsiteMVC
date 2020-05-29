@@ -1,45 +1,36 @@
 ﻿@model Wembsite.Models.UserContent
 
-<h2 style="color:white">View Post</h2>
-<link href="../../Content/material.css" rel="stylesheet" type="text/css" />
-<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+<body class="prof">
+    <h2 style="color:white">View Post</h2>
+    <link href="../../Content/material.css" rel="stylesheet" type="text/css" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-<div>
-    <div class="card" style="padding-top:0px">
-        <br />
-        <label style="color:mediumpurple">Username: </label>
-        <label style="color:white">@Model.username</label><br />
-        <label style="color:mediumpurple">Privacy: </label>
-        <label style="color:white">@Model.privacy</label><br />
-        <label style="color:mediumpurple">Date Created: </label>
-        <label style="color:white">@Model.DateCreation</label><br />
-        <label style="color:mediumpurple">File Type: </label>
-        <label style="color:white">@Model.FileType</label><br />
-        <label style="color:mediumpurple">Post Text: </label>
-        @{
-            var text = Model.RawData;
-            if (Model.RawData == null || Model.RawData == "")
-            {
-                text = "Simple Text";
+    <div>
+        <div class="card" style="padding-top:0px">
+            <br />
+            <label style="color:mediumpurple">Username: </label>
+            <label style="color:white">@Model.username</label><br />
+            <label style="color:mediumpurple">Privacy: </label>
+            <label style="color:white">@Model.privacy</label><br />
+            <label style="color:mediumpurple">Date Created: </label>
+            <label style="color:white">@Model.DateCreation</label><br />
+            <label style="color:mediumpurple">File Type: </label>
+            <label style="color:white">@Model.FileType</label><br />
+            <label style="color:mediumpurple">Post Text: </label>
+            @{
+                var text = Model.RawData;
+                if (Model.RawData == null || Model.RawData == "")
+                {
+                    text = "Simple Text";
+                }
             }
-        }
-        <label style="color:white">@text</label><br />
-        @*<br />
-            @if (Model.filePath != "")
-            {
-                <div class="comment">
-                    @{
-                        string[] path = Model.filePath.Split('/');
-                        path[1] = path[1].ToString().Prepend('.');
-                    }
-                    <img src="@Model.filePath" style="width:400px; height:400px; padding:20px 20px 20px 20px; object-fit:scale-down" ; />
-                </div>
-            }
-            <br />*@
+            <label style="color:white">@text</label><br />
+        </div>
     </div>
-</div>
-<p>
-    @Html.ActionLink("Edit", "EditPost", new { id = Model.contentID })
-</p>
+    <p>
+        @Html.ActionLink("Edit", "EditPost", new { id = Model.contentID })
+    </p>
 
-<button onclick="location.href='@Url.Action("AllPosts") ';return false;" class="tile" style="display:inline-block;width:140px; height:50px"><i class="material-icons" style="display:block">person</i>Back to List</button>
+    <button onclick="location.href='@Url.Action("AllPosts") ';return false;" class="tile" style="display:inline-block;width:140px; height:50px"><i class="material-icons" style="display:block">person</i>Back to List</button>
+
+</body>
