@@ -114,7 +114,7 @@ begin
         @Dat datetime
 
     set @Dat=GETDATE()
-    select @contID=count(*)+1
+    select @contID=max(contentID)+1
     from UserContent
 
     set @Out=0
