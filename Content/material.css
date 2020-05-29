@@ -1,17 +1,39 @@
 ﻿body {
     background-color: rgb(23, 23, 24);
-    background-size: cover;
+    background-size:auto;
     display: flex;
     flex-direction: column;
     justify-content: center;
+    /*background-image: url('cheemsBG.jpg')*/
 }
 
-h1{
-    color:white;
+    body.log {
+        background-image: url('cheemsBG.jpg');
+        background-size:cover;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+body.prof {
+    background-image: url('cheemsBG.jpg');
+    background-size:initial;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
 }
 
-h2{
-    color:white;
+h1 {
+    color: white;
+    position: relative;
+    animation: mymoveFromTop 1s normal
+}
+
+h2 {
+    color: white;
+    position: relative;
+    animation: mymoveFromRight 0.6s normal
 }
 
 div.card {
@@ -21,9 +43,23 @@ div.card {
     padding: 10px 5px 10px 5px;
     margin-bottom: 10px;
     margin-top: 10px;
-    min-height:0%;
-    min-width:0%;
-    border-radius:10px;
+    min-height: 0%;
+    min-width: 0%;
+    border-radius: 10px;
+    position: relative;
+    animation: mymoveFromLeft 0.6s normal
+}
+
+div.card_with_buttons {
+    background-color: rgb(30, 30, 30);
+    box-shadow: 2px 2px 10px rgb(17, 17, 17);
+    text-indent: 10px;
+    padding: 10px 5px 10px 5px;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    min-height: 0%;
+    min-width: 0%;
+    border-radius: 10px;
 }
 
 dl.dl-horizontal {
@@ -43,32 +79,61 @@ div.comment {
     padding: 10px 5px 10px 5px;
     margin-bottom: 10px;
     margin-top: 10px;
-    border-radius:10px;
+    border-radius: 10px;
 }
 
 button {
-    background-color: #4c566a/*mediumpurple*/;
+    background-color: #4c566a /*mediumpurple*/;
     border: 1px solid white;
-    border-radius:5px;
+    border-radius: 5px;
     height: 30px;
     width: 100px;
     margin-left: 10px;
     margin-top: 20px;
     resize: horizontal;
-    color:white;
+    color: white;
     transition: 0.4s;
 }
 
     button:hover {
-        background-color: white/*rgb(46, 46, 46)*/; /* Green */
+        background-color: white /*rgb(46, 46, 46)*/; /* Green */
         color: #4c566a;
         box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
         border: 2px solid #4c566a;
         transform: scale(1.2,1.2) /* Standard syntax */
     }
 
+#myCard button.greenBtn {
+    background-color: green;
+    border: 1px solid white;
+    border-radius: 5px;
+    height: 30px;
+    width: 130px;
+    margin-left: 10px;
+    margin-top: 20px;
+    resize: horizontal;
+    color: white;
+    transition: 0.3s;
+}
+
+    #myCard button.greenBtn:hover {
+        background-color: white; /*rgb(46, 46, 46)*/ /* Green */
+        color: green;
+        box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+        border: 2px solid #4c566a;
+        transform: scale(1.2,1.2); /* Standard syntax */
+    }
+
+a{
+    color:hotpink;
+    font-size:medium;
+}
+
+a:hover{
+    color:deeppink;
+}
+
 input.button {
-   
     background-color: #4c566a;
     border: 1px solid white;
     border-radius: 5px;
@@ -81,13 +146,13 @@ input.button {
     transition: 0.3s;
 }
 
-input.button:hover {
-    background-color: white/*rgb(46, 46, 46)*/; /* Green */
-    color: #4c566a;
-    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
-    border: 2px solid #4c566a;
-    transform:scale(1.2,1.2); /* Standard syntax */
-}
+    input.button:hover {
+        background-color: white /*rgb(46, 46, 46)*/; /* Green */
+        color: #4c566a;
+        box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+        border: 2px solid #4c566a;
+        transform: scale(1.2,1.2); /* Standard syntax */
+    }
 
 div.createNewPost {
     background-color: rgb(30, 30, 30);
@@ -96,32 +161,34 @@ div.createNewPost {
     padding: 30px 20px 30px 30px;
     margin-bottom: 10px;
     margin-top: 10px;
-    border-radius:10px;
+    border-radius: 10px;
+    position: relative;
+    animation: mymoveFromLeft 0.6s normal
 }
 
 input.searchBox {
-     width:400px;
-     border-radius:5px;
+    width: 400px;
+    border-radius: 5px;
 }
 
-input.searchBox:hover{
-    box-shadow:1px 1px 20px ;
+    input.searchBox:hover {
+        box-shadow: 1px 1px 20px;
+    }
+
+div.flex-container {
+    display: inline-flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
 }
 
-div.flex-container{
-    display:inline-flex;
-    flex-direction:row;
-    flex-wrap:wrap;
-    justify-content:center;
-}
-
-button.tile{
+button.tile {
     height: 800px;
-    width:300px;
+    width: 300px;
 }
 
-::placeholder{
-    color:white;
+::placeholder {
+    color: white;
 }
 
 .inputField {
@@ -136,6 +203,8 @@ button.tile{
     border-width: 2px;
     border-style: solid;
     box-shadow: 2px 2px 10px rgb(17, 17, 17);
+    position: relative;
+    animation: mymoveFromLeft 0.6s normal
 }
 
     .inputField:hover {
@@ -156,6 +225,8 @@ button.tile{
     border-style: solid;
     margin-bottom: 10px;
     box-shadow: 2px 2px 10px rgb(17, 17, 17);
+    position: relative;
+    animation: mymoveFromLeft 0.6s normal
 }
 
     .inputField_signup:hover {
@@ -177,7 +248,7 @@ button.tile{
     border-color: transparent;
     margin-top: 30px;
     box-shadow: 2px 2px 10px rgb(17, 17, 17);
-    padding-top:0px;
+    padding-top: 0px;
 }
 
 .signupForm {
@@ -217,4 +288,34 @@ text {
 
 input {
     border-radius: 5px;
+}
+
+@keyframes mymoveFromLeft {
+    from {
+        left: 3000px;
+    }
+
+    to {
+        left: 0px;
+    }
+}
+
+@keyframes mymoveFromRight {
+    from {
+        right: 3000px;
+    }
+
+    to {
+        right: 0px;
+    }
+}
+
+@keyframes mymoveFromTop {
+    from {
+        top: -200px;
+    }
+
+    to {
+        top: 0px;
+    }
 }
