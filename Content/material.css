@@ -1,5 +1,5 @@
 ﻿body {
-    background-color: rgb(23, 23, 24);
+    background-color: rgb(42, 42, 42);
     background-size:auto;
     display: flex;
     flex-direction: column;
@@ -194,7 +194,7 @@ button.tile {
 .inputField {
     width: 60%;
     height: 35px;
-    border-radius: 10px;
+    border-radius: 15px;
     padding-left: 7px;
     padding-right: 7px;
     margin-bottom: 30px;
@@ -215,8 +215,8 @@ button.tile {
 
 .inputField_Signup {
     width: 60%;
-    height: 35px;
-    border-radius: 10px;
+    height: 25px;
+    border-radius: 8px;
     padding-left: 7px;
     padding-right: 7px;
     transition: 0.4s;
@@ -229,7 +229,7 @@ button.tile {
     animation: mymoveFromLeft 0.6s normal
 }
 
-    .inputField_signup:hover {
+    .inputField_Signup:hover {
         width: 65%;
         border-color: midnightblue;
         box-shadow: 3px 3px 20px rgb(17, 17, 17);
@@ -264,6 +264,7 @@ button.tile {
     border-color: transparent;
     margin-top: 10px;
     box-shadow: 2px 2px 10px rgb(17, 17, 17);
+    padding-top:0px;
 }
 
 /*a {
