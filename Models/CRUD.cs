@@ -274,13 +274,17 @@ namespace Wembsite.Models
             {
                 connect.Close();
             }
+
             connect.Open();
-            SqlCommand cmd = new SqlCommand("", connect);
-            cmd.CommandText = "insert into followRequests values(@usernameA, @usernameB)";
-            cmd.Parameters.AddWithValue("@usernameA", sender);
-            cmd.Parameters.AddWithValue("@usernameB", receiver);
+            SqlCommand cmd = new SqlCommand("sendFollowReq", connect);
+
+            cmd.CommandType = System.Data.CommandType.StoredProcedure;
+            cmd.Parameters.Add("@userA", SqlDbType.VarChar, 30).Value =sender;
+            cmd.Parameters.Add("@userB", SqlDbType.VarChar, 30).Value =receiver;
+            //cmd.Parameters.Add("@Out", SqlDbType.Int).Direction = ParameterDirection.Output;
             cmd.ExecuteNonQuery();
             connect.Close();
+
         }
 
         public static bool RequestSent(string usernameA, string usernameB)

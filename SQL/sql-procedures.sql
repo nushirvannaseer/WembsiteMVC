@@ -354,3 +354,20 @@ begin
     from comments
     where contentID=@contentID
 end
+go
+
+drop PROCEDURE sendFollowReq
+go
+create PROCEDURE sendFollowReq
+    @userA varchar(30),
+    @userB VARCHAR(30)
+as
+BEGIN
+    if not exists (
+        select* 
+        from followRequests
+        where sender=@userA and receiver=@userB)
+    begin
+        insert into followRequests values(@userA, @userB)
+    end
+end
