@@ -4,9 +4,10 @@
 @{
     Layout = null;
 }
-
+@{ var count = 0;}
 @foreach (var item in Model)
 {
+    count=count+1;
     <div class="card" style="background-color:rgb(30, 30, 30);text-indent:5px; text-align:left; margin:20px 20px 20px 20px; padding:20px 20px 20px 20px">
 
         @Html.ActionLink(item.username, "../AllUsers/NonSessionUserProfile", new { username = item.username })<br />
@@ -51,24 +52,46 @@
             var id2 = @item.contentID.ToString() + "commentList";
         }
 
-        <div id="@id2" class="comment" style="background-color:rgb(60, 60, 60)">
-            @{
-                Html.RenderPartial("_Comment", CRUD.GetCommentsOfAPost(item.contentID), new ViewDataDictionary { { "ContentID", item.contentID.ToString() } });
-            }
-        </div>
+    <div id="@id2" class="comment" style="background-color:rgb(60, 60, 60)">
+        @{
+            Html.RenderPartial("_Comment", CRUD.GetCommentsOfAPost(item.contentID), new ViewDataDictionary { { "ContentID", item.contentID.ToString() } });
+
+        }
+        
+    </div>
         @using (Ajax.BeginForm("AddComment", "UserHome", new { contentID = id2 }, new AjaxOptions
         {
             HttpMethod = "post",
-            UpdateTargetId = id2,
+            UpdateTargetId = @id2,
+            
+            OnSuccess="resetValues",
             InsertionMode = InsertionMode.Replace,
         }
         ))
         {
-            <input style="color:white;width:300px;border-color:rgb(46,46,46); padding-left:10px; background-color:rgb(100, 100, 100)";class="searchBox" id="commentText" name="commentText" value="" placeholder="Write a comment..." />
-            <input class="button" type="submit" value="Post Comment" />
-        }
+                var spID = count.ToString() + "input";
+            <input id="@spID" name="commentText" autocomplete="off"  style="color:white;width:300px;border-color:rgb(46,46,46); padding-left:10px; background-color:rgb(100, 100, 100)" class="searchBox"  value="" placeholder="Write a comment..." />
+            <input  class="button" type="submit" value="Post Comment"/>
 
+        }
     </div>
 
 
 }
+
+<script>
+    function resetValues() {
+        for (var i = 1; i <=@count; ++i)
+        {
+            var str = i.toString() + "input";
+            if (document.getElementById(str)!= null)
+            document.getElementById(str).value = "";
+        }
+        
+    }
+
+    function itemNo(name) {
+        alert(name);
+    }
+
+</script>
