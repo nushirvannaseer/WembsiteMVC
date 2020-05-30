@@ -114,18 +114,16 @@ begin
         @Dat datetime
 
     set @Dat=GETDATE()
-    select @contID=max(contentID)+1
-    from UserContent
-
+    if exists(  select *
+    from UserContent)
+    BEGIN
+        select @contID=max(contID)+1 from UserContent
+    end
+    else BEGIN set @contID=1 end
     set @Out=0
-    if not exists (select *
-    from UserContent
-    where contentID=@contID)
-    begin
         insert into UserContent
         values(@contID, @UName, @privacy, @Dat, @FileT, @RData, 0, @filepath)
         set @Out=1
-    end
 end
 
 go
