@@ -117,7 +117,7 @@ begin
     if exists(  select *
     from UserContent)
     BEGIN
-        select @contID=max(contID)+1 from UserContent
+        select @contID=max(contentID)+1 from UserContent
     end
     else BEGIN set @contID=1 end
     set @Out=0
